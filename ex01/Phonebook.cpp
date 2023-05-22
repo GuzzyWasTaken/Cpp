@@ -38,6 +38,11 @@
 	
 // }
 
+void print(const char *output)
+{
+	std::cout << output << std::endl;
+}
+
 void Format(t_Booklet &Contact)
 {
 	if (Contact.Name.length() > 10)
@@ -56,6 +61,23 @@ void Format(t_Booklet &Contact)
 		Contact.nickname.erase(10, Contact.nickname.length());
 	}
 }
+
+void AddSpace(t_Booklet &Contact)
+{
+	if (Contact.Name.length() < 10)
+	{
+		Contact.Name += std::string(10 - Contact.Name.length(), ' ');
+	}
+	if (Contact.LastName.length() < 10)
+	{
+		Contact.LastName += std::string(10 - Contact.LastName.length(), ' ');
+	}
+	if (Contact.nickname.length() < 10)
+	{
+		Contact.nickname += std::string(10 - Contact.nickname.length(), ' ');
+	}
+}
+
 void PrintContact(t_Booklet Contact)
 {
 	std::cout << "Name:" << Contact.Name << std::endl;
@@ -63,31 +85,43 @@ void PrintContact(t_Booklet Contact)
 	std::cout << "Nickame:" << Contact.nickname << std::endl;
 	std::cout << "Index:" << Contact.index << std::endl;
 }
+
+void PrintLine(PhoneBook &PhoneBook, int Index)
+{
+	Format(PhoneBook.Booklet[Index]);
+	AddSpace(PhoneBook.Booklet[Index]);
+	std::cout << "|    ";
+	std::cout << Index;
+	std::cout << "     |";
+	std::cout << PhoneBook.Booklet[Index].Name;
+	std::cout << "|";
+	std::cout << PhoneBook.Booklet[Index].LastName;
+	std::cout << "|";
+	std::cout << PhoneBook.Booklet[Index].nickname;
+	std::cout << "|" << std::endl;
+}
+
 void SearchContacts(PhoneBook PhoneBook)
 {
+    std::cout << "|  Index   |First Name|Last Name |Nickname  |" << std::endl;
+	std::cout << "|----------|----------|----------|----------|" << std::endl;
+	for(int i = 0; i < PhoneBook.NumberOfContacts; i++)
+	{
+		if (PhoneBook.NumberOfContacts == 0)
+			break;
+		PrintLine(PhoneBook, i);
+	}
+	
 	std::string Input;
 	std::cout << "Search:";
 	std::cin >> Input;
-	for(int i = 0; i < 9; i++)
+	for(int i = 1; i < 9; i++)
 	{
 		if (Input == PhoneBook.Booklet[i].Name)
 			PrintContact(PhoneBook.Booklet[i]);
 	}
 }
 
-void PrintLine(PhoneBook &PhoneBook, int Index)
-{
-	Format(PhoneBook.Booklet[Index]);
-	std::cout << "|";
-	std::cout << Index;
-	std::cout << "|";
-	std::cout << PhoneBook.Booklet[Index].Name;
-	std::cout << "|";
-	std::cout << PhoneBook.Booklet[Index].LastName;
-	std::cout << "|";
-	std::cout << PhoneBook.Booklet[Index].nickname;
-	std::cout << "|";
-}
 
 void AddContact(PhoneBook &PhoneBook)
 {
