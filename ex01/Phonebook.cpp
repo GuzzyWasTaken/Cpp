@@ -9,8 +9,11 @@
 /*   Updated: 2023/05/16 17:00:01 by auzochuk      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include <iostream>
+#include <sstream>
 #include "Phonebook.hpp"
+#include <cstdlib>
+#include <cstring>
 
 //todo: make a function that prints a line asked according to the index given. 
 	//or print all of the current contacts.
@@ -66,7 +69,7 @@ void AddSpace(t_Booklet &Contact)
 {
 	if (Contact.Name.length() < 10)
 	{
-		Contact.Name += std::string(10 - Contact.Name.length(), ' ');
+		Contact.Name += std::string(' ', 10 - Contact.Name.length());
 	}
 	if (Contact.LastName.length() < 10)
 	{
@@ -85,7 +88,9 @@ void PrintContact(t_Booklet Contact)
 	std::cout << "Nickame:" << Contact.nickname << std::endl;
 	std::cout << "Index:" << Contact.index << std::endl;
 }
-
+//todo: index needs fixing
+//currently index's are botched
+//todo: right alignment on text
 void PrintLine(PhoneBook &PhoneBook, int Index)
 {
 	Format(PhoneBook.Booklet[Index]);
@@ -109,16 +114,29 @@ void SearchContacts(PhoneBook PhoneBook)
 	{
 		if (PhoneBook.NumberOfContacts == 0)
 			break;
-		PrintLine(PhoneBook, i);
+		PrintLine(PhoneBook, i + 1);
 	}
 	
+	bool Found = false;
 	std::string Input;
 	std::cout << "Search:";
 	std::cin >> Input;
 	for(int i = 1; i < 9; i++)
 	{
-		if (Input == PhoneBook.Booklet[i].Name)
+		std::stringstream ss;
+        ss << PhoneBook.Booklet[i].index;
+		std::cout << "index " <<  PhoneBook.Booklet[i].index << std::endl;
+        std::string indexString = ss.str();
+		if (Input == indexString)
+		{
 			PrintContact(PhoneBook.Booklet[i]);
+			Found = true;
+		}
+	}
+	if(!Found)
+	{
+		print("specified index does not exist");
+		std::cout << "Search:";
 	}
 }
 
@@ -131,6 +149,7 @@ void AddContact(PhoneBook &PhoneBook)
 		index = 1;
 	else
 		index = PhoneBook.NumberOfContacts + 1;
+	std::cout << "index = " <<  index << std::endl;
 	std::cout << "Name:" ;
 	std::cin >> PhoneBook.Booklet[index - 1].Name;
 	std::cout << "Last Name:";
