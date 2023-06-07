@@ -6,45 +6,18 @@
 /*   By: auzochuk <auzochuk@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/02 14:51:04 by auzochuk      #+#    #+#                 */
-/*   Updated: 2023/05/16 17:00:01 by auzochuk      ########   odam.nl         */
+/*   Updated: 2023/06/07 19:33:32 by auzochuk      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-#include <iostream>
+
 #include <sstream>
 #include "Phonebook.hpp"
 #include <cstdlib>
 #include <cstring>
+#include <iomanip>
 
-//todo: make a function that prints a line asked according to the index given. 
-	//or print all of the current contacts.
 //todo: format function
 //todo:
-// void DisplayContacts(PhoneBook PhoneBook)
-// {
-// 	t_Booklet *List = PhoneBook.Booklet;
-	
-// 	if (PhoneBook.NumberOfContacts == 0)
-// 		std::cout << "no contacts rn" << std::endl;
-// 	for(size_t i = 0; i < List[i].Name.length(); i++)
-// 	{
-// 		if(List[i].Name.length() > 10)
-// 		{
-// 			List[i].Name.replace(10, 1, ".");
-// 			List[i].Name.erase(10, List[i].Name.length());
-// 		}
-// 	}
-	
-// 	std::cout << "|  Index   |First Name|Last Name |Nickname  |" << std::endl;
-// 	std::cout << "|----------|----------|----------|----------|" << std::endl;
-// 	std::cout.width(10);
-// 	std::cout << "|    1     |" << List[0].Name << "|----------|----------|" << std::endl;
-	
-// }
-
-void print(const char *output)
-{
-	std::cout << output << std::endl;
-}
 
 void Format(t_Booklet &Contact)
 {
@@ -64,45 +37,42 @@ void Format(t_Booklet &Contact)
 		Contact.nickname.erase(10, Contact.nickname.length());
 	}
 }
+//todo: make sure contacts are deleetd once 8 is reached.
 
-void AddSpace(t_Booklet &Contact)
+
+void FormatPrint(std::string str)
 {
-	if (Contact.Name.length() < 10)
+	if (str.length() < 10)
+		std::cout << std::setw(10 - str.length()) << std::left << str;
+	else if (str.length() > 10)
 	{
-		Contact.Name += std::string(' ', 10 - Contact.Name.length());
+		str.erase(10, str.length());
+		str.replace(10, 1, ".");
+		std::cout << str;
 	}
-	if (Contact.LastName.length() < 10)
-	{
-		Contact.LastName += std::string(10 - Contact.LastName.length(), ' ');
-	}
-	if (Contact.nickname.length() < 10)
-	{
-		Contact.nickname += std::string(10 - Contact.nickname.length(), ' ');
-	}
+	else 
+		std::cout << str;
 }
-
 void PrintContact(t_Booklet Contact)
 {
 	std::cout << "Name:" << Contact.Name << std::endl;
 	std::cout << "Last name:" << Contact.LastName << std::endl;
 	std::cout << "Nickame:" << Contact.nickname << std::endl;
-	std::cout << "Index:" << Contact.index << std::endl;
+	std::cout << "Index:" << Contact.index + 1 << std::endl;
 }
-//todo: index needs fixing
-//currently index's are botched
-//todo: right alignment on text
+
 void PrintLine(PhoneBook &PhoneBook, int Index)
 {
 	Format(PhoneBook.Booklet[Index]);
-	AddSpace(PhoneBook.Booklet[Index]);
+	//AddSpace(PhoneBook.Booklet[Index]);
 	std::cout << "|    ";
-	std::cout << Index;
+	std::cout << Index + 1;
 	std::cout << "     |";
-	std::cout << PhoneBook.Booklet[Index].Name;
+	FormatPrint(PhoneBook.Booklet[Index].Name);
 	std::cout << "|";
-	std::cout << PhoneBook.Booklet[Index].LastName;
+	FormatPrint(PhoneBook.Booklet[Index].LastName);
 	std::cout << "|";
-	std::cout << PhoneBook.Booklet[Index].nickname;
+	FormatPrint(PhoneBook.Booklet[Index].nickname);
 	std::cout << "|" << std::endl;
 }
 
@@ -114,30 +84,32 @@ void SearchContacts(PhoneBook PhoneBook)
 	{
 		if (PhoneBook.NumberOfContacts == 0)
 			break;
-		PrintLine(PhoneBook, i + 1);
+		PrintLine(PhoneBook, i);
+	}
+	while(1)
+	{
+		std::string Input;
+		std::cout << "Search:";
+		std::cin >> Input;
+		int Index;
+		try 
+		{
+			Index = std::stoi(Input, NULL);
+		}
+		catch(std::invalid_argument & e)
+		{
+			std::cout << "Must be numerical value" << std::endl;
+			continue;
+		}
+		if (Index >= 0 && Index <= PhoneBook.NumberOfContacts)
+		{
+			PrintContact(PhoneBook.Booklet[Index - 1]);
+			break;
+		}
+		// if (Input == "BACK")
+		// 	break;
 	}
 	
-	bool Found = false;
-	std::string Input;
-	std::cout << "Search:";
-	std::cin >> Input;
-	for(int i = 1; i < 9; i++)
-	{
-		std::stringstream ss;
-        ss << PhoneBook.Booklet[i].index;
-		std::cout << "index " <<  PhoneBook.Booklet[i].index << std::endl;
-        std::string indexString = ss.str();
-		if (Input == indexString)
-		{
-			PrintContact(PhoneBook.Booklet[i]);
-			Found = true;
-		}
-	}
-	if(!Found)
-	{
-		print("specified index does not exist");
-		std::cout << "Search:";
-	}
 }
 
 
@@ -145,7 +117,7 @@ void AddContact(PhoneBook &PhoneBook)
 {
 	int index = 0;
 	
-	if (PhoneBook.NumberOfContacts == 9)
+	if (PhoneBook.NumberOfContacts == 8)
 		index = 1;
 	else
 		index = PhoneBook.NumberOfContacts + 1;
@@ -157,7 +129,7 @@ void AddContact(PhoneBook &PhoneBook)
 	std::cout << "Nickname:";
 	std::cin >> PhoneBook.Booklet[index - 1].nickname;
 	PhoneBook.Booklet[index - 1].index = index - 1;
-	if (PhoneBook.NumberOfContacts < 9)
+	if (PhoneBook.NumberOfContacts < 8)
 		PhoneBook.NumberOfContacts += 1;
 	
 }
@@ -167,11 +139,12 @@ int main()
 	PhoneBook Phonebook;
 	
 	Phonebook.NumberOfContacts = 0;
-	Phonebook.Booklet[0].Name = "DanniieelllLLLLl";
+	// Phonebook.Booklet[0].Name = "DanniieelllLLLLl";
 	std::string Input;
 	std::cout << "Welcome to my phonebook" << std::endl;
 	while(Input != "EXIT")
 	{
+		std::cout << "COMMANDS [SEARCH] [ADD] [EXIT]:";
 		std::cin >> Input;
 		if (Input == "EXIT")
 			return(0);
