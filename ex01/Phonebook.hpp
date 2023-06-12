@@ -6,7 +6,7 @@
 /*   By: auzochuk <auzochuk@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/02 14:52:57 by auzochuk      #+#    #+#                 */
-/*   Updated: 2023/05/02 18:47:30 by auzochuk      ########   odam.nl         */
+/*   Updated: 2023/06/12 19:36:37 by auzochuk      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,16 @@
 
 #include <iostream>
 
-struct t_Booklet
+class t_Booklet
 {
+public:
     std::string Name;
     std::string LastName;
     std::string nickname;
+    std::string PhoneNumber;
+    std::string DarkSecret;
     
-    int         index;
+    int index;
 };
 
 class PhoneBook
