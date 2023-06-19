@@ -6,7 +6,7 @@
 /*   By: auzochuk <auzochuk@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/02 14:51:04 by auzochuk      #+#    #+#                 */
-/*   Updated: 2023/06/12 20:04:56 by auzochuk      ########   odam.nl         */
+/*   Updated: 2023/06/19 18:55:37 by auzochuk      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ void SearchContacts(PhoneBook PhoneBook)
 void AddContact(PhoneBook &PhoneBook)
 {
 	int index = 0;
+	long PhoneNumber = 0;
+
 	if (PhoneBook.NumberOfContacts == 8)
 		index = 1;
 	else
@@ -103,6 +105,15 @@ void AddContact(PhoneBook &PhoneBook)
 	std::getline(std::cin, PhoneBook.Booklet[index - 1].nickname);
 	std::cout << "Phone Number:";
 	std::getline(std::cin, PhoneBook.Booklet[index - 1].PhoneNumber);
+	try 
+	{
+		PhoneNumber = std::stoi(PhoneBook.Booklet[index - 1].PhoneNumber, NULL);
+	}
+	catch(std::invalid_argument & e)
+	{
+		std::cout << "Must be numerical value, Add contact again." << std::endl;
+		return;
+	}
 	std::cout << "Darkest Secret:";
 	std::getline(std::cin, PhoneBook.Booklet[index - 1].DarkSecret);
 	PhoneBook.Booklet[index - 1].index = index - 1;
@@ -121,6 +132,11 @@ int main()
 	while(Input != "EXIT")
 	{
 		std::cout << "COMMANDS [SEARCH] [ADD] [EXIT]:";
+		if (!std::getline(std::cin, Input))
+		{
+			std::cout << "EOF detected" << std::endl;
+			exit (0);
+		}
 		std::getline(std::cin, Input);
 		if (Input == "EXIT")
 			return(0);
@@ -128,6 +144,5 @@ int main()
 			SearchContacts(Phonebook);
 		if(Input == "ADD")
 			AddContact(Phonebook);
-		
 	}
 }
