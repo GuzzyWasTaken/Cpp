@@ -6,7 +6,7 @@
 /*   By: auzochuk <auzochuk@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/02 14:52:57 by auzochuk      #+#    #+#                 */
-/*   Updated: 2023/06/12 19:36:37 by auzochuk      ########   odam.nl         */
+/*   Updated: 2023/06/21 15:48:37 by auzochuk      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ class PhoneBook
 {
     public:
         int     NumberOfContacts;
-        t_Booklet Booklet[8];
+        t_Booklet Booklet[7];
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: auzochuk <auzochuk@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/02 14:51:04 by auzochuk      #+#    #+#                 */
-/*   Updated: 2023/06/19 18:55:37 by auzochuk      ########   odam.nl         */
+/*   Updated: 2023/06/21 15:53:39 by auzochuk      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void FormatPrint(const std::string str)
 {
     if (str.length() < 10)
-        std::cout << std::setw(10) << std::left << str;
+        std::cout << std::setw(10) << std::right << str;
     else if (str.length() > 10)
     {
         std::string modifiedStr = str.substr(0, 10);
@@ -43,7 +43,7 @@ void PrintContact(t_Booklet Contact)
 void PrintLine(PhoneBook &PhoneBook, int Index)
 {
 	std::cout << "|    ";
-	std::cout << Index + 1;
+	std::cout << Index;
 	std::cout << "     |";
 	FormatPrint(PhoneBook.Booklet[Index].Name);
 	std::cout << "|";
@@ -80,7 +80,7 @@ void SearchContacts(PhoneBook PhoneBook)
 		}
 		if (Index >= 0 && Index <= PhoneBook.NumberOfContacts)
 		{
-			PrintContact(PhoneBook.Booklet[Index - 1]);
+			PrintContact(PhoneBook.Booklet[Index]);
 			break;
 		}
 	}
@@ -96,18 +96,18 @@ void AddContact(PhoneBook &PhoneBook)
 	if (PhoneBook.NumberOfContacts == 8)
 		index = 1;
 	else
-		index = PhoneBook.NumberOfContacts + 1;
+		index = PhoneBook.NumberOfContacts;
 	std::cout << "Name:" ;
-	std::getline(std::cin,PhoneBook.Booklet[index - 1].Name);
+	std::getline(std::cin,PhoneBook.Booklet[index].Name);
 	std::cout << "Last Name:";
-	std::getline(std::cin, PhoneBook.Booklet[index - 1].LastName);
+	std::getline(std::cin, PhoneBook.Booklet[index].LastName);
 	std::cout << "Nickname:";
-	std::getline(std::cin, PhoneBook.Booklet[index - 1].nickname);
+	std::getline(std::cin, PhoneBook.Booklet[index].nickname);
 	std::cout << "Phone Number:";
-	std::getline(std::cin, PhoneBook.Booklet[index - 1].PhoneNumber);
+	std::getline(std::cin, PhoneBook.Booklet[index].PhoneNumber);
 	try 
 	{
-		PhoneNumber = std::stoi(PhoneBook.Booklet[index - 1].PhoneNumber, NULL);
+		PhoneNumber = std::stoi(PhoneBook.Booklet[index].PhoneNumber, NULL);
 	}
 	catch(std::invalid_argument & e)
 	{
@@ -115,10 +115,12 @@ void AddContact(PhoneBook &PhoneBook)
 		return;
 	}
 	std::cout << "Darkest Secret:";
-	std::getline(std::cin, PhoneBook.Booklet[index - 1].DarkSecret);
-	PhoneBook.Booklet[index - 1].index = index - 1;
+	std::getline(std::cin, PhoneBook.Booklet[index].DarkSecret);
+	PhoneBook.Booklet[index].index = index;
 	if (PhoneBook.NumberOfContacts < 8)
 		PhoneBook.NumberOfContacts += 1;
+	std::cout << "made contact in element: " << (index - 1) << "proof: " << PhoneBook.Booklet[index].Name << std::endl;
+	
 	
 }
 
@@ -127,6 +129,7 @@ int main()
 	PhoneBook Phonebook;
 	
 	Phonebook.NumberOfContacts = 0;
+	memset(Phonebook.Booklet, 0, sizeof(Phonebook.Booklet));
 	std::string Input;
 	std::cout << "Welcome to my phonebook" << std::endl;
 	while(Input != "EXIT")
@@ -137,7 +140,6 @@ int main()
 			std::cout << "EOF detected" << std::endl;
 			exit (0);
 		}
-		std::getline(std::cin, Input);
 		if (Input == "EXIT")
 			return(0);
 		if (Input == "SEARCH")
