@@ -1,26 +1,14 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         ::::::::             #
-#    Makefile                                           :+:    :+:             #
-#                                                      +:+                     #
-#    By: auzochuk <auzochuk@student.codam.nl>         +#+                      #
-#                                                    +#+                       #
-#    Created: 2023/05/01 19:26:22 by auzochuk      #+#    #+#                  #
-#    Updated: 2023/05/01 19:34:00 by auzochuk      ########   odam.nl          #
-#                                                                              #
-# **************************************************************************** #
-
 CPP = g++
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
 SRCS = megaphone.cpp
-OBJS = $(SRCS:.cpp=.o)
-TARGET = megaphone
+OBJS = $(SRCS:.cpp=.o) 
+TARGET = Megaphone
 
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(CPP) $(CPPFLAGS) $^ -o $@
+	$(CPP) $(CPPFLAGS) $(OBJS) -o $(TARGET)
 
 %.o: %.cpp
 	$(CPP) $(CPPFLAGS) -c $< -o $@

@@ -1,22 +1,10 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         ::::::::             #
-#    Makefile                                           :+:    :+:             #
-#                                                      +:+                     #
-#    By: auzochuk <auzochuk@student.codam.nl>         +#+                      #
-#                                                    +#+                       #
-#    Created: 2023/05/01 19:26:22 by auzochuk      #+#    #+#                  #
-#    Updated: 2023/06/27 15:26:52 by auzochuk      ########   odam.nl          #
-#                                                                              #
-# **************************************************************************** #
-
 CPP = g++
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-HDR = Zombie.hpp
-SRCS = main.cpp Zombie.cpp randomChump.cpp newZombie.cpp 
+HDR = Phonebook.hpp
+SRCS = Phonebook.cpp  
 OBJS = $(SRCS:.cpp=.o) 
-TARGET = BraiiiiiiinnnzzzZ
+TARGET = Phonebook
 
 all: $(TARGET)
 

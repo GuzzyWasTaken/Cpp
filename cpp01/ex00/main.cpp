@@ -2,9 +2,9 @@
 
 int main()
 {
-   Zombie *john = newZombie("john");
+   Zombie *dave = newZombie("john");
 
-    john->announce();
+    dave->announce();
 }
 
  //delete zombies
