@@ -6,5 +6,15 @@
 
 void HumanA::attack()
 {
-    std::cout << name << "attacks with their" << sword.getType() << std::endl;
+    std::cout << _name << "attacks with their" << _weapon.getType() << std::endl;
+}
+
+HumanA::HumanA(std::string name, Weapon club)
+{
+    _name = name;
+    _weapon = club;
+}
+
+HumanA::~HumanA()
+{
 }

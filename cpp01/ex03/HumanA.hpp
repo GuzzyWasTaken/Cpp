@@ -4,15 +4,13 @@
 
 class HumanA
 {
+    private:
+        std::string _name;
+        Weapon& _weapon;
+        HumanA();
+
     public:
-        Weapon sword;
-        HumanA(std::string str, Weapon club)
-        {
-            name = str;
-            Weapon club = Weapon();
-            sword.setType("crude spiked club");
-        };
-        std::string name;
-        void attack();
+        HumanA(std::string str, Weapon& club);
         ~HumanA();
+        void attack();
 };

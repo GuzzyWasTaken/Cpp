@@ -4,17 +4,13 @@
 
 class HumanB
 {
+    private: 
+            std::string _name;
+            Weapon *_weapon;
+
     public:
-        Weapon weapon;
-        HumanB(std::string str)
-        {
-            name = str;
-        };
-        void setWeapon(Weapon club)
-        {
-            weapon = club;
-        }
-        std::string name;
-        void attack();
         ~HumanB();
+        HumanB(std::string str);
+        void setWeapon(Weapon& club);
+        void attack();
 };
