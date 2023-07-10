@@ -1,12 +1,15 @@
-#ifndef SED_HPP
-# define  SED_HPP
+#ifndef HARL_HPP
+# define  HARL_HPP
 
 # include <cstdlib>
-# include <cstring>
+# include <string>
 # include <iomanip>
 # include <fstream>
+# include <iostream>
 
-struct State {
+
+struct State 
+{
     std::string code;
     std::string message;
 };
@@ -17,7 +20,7 @@ State WARNING = {"WARNING", "I think I desertve to have some extra bacon for fre
 State ERROR = {"ERROR", "This is unnacceptable, I want to speak to the manager now!"};
 
 
-typedef class Harl
+class Harl
 {
     private:
         void debug(void);
@@ -26,9 +29,9 @@ typedef class Harl
         void error(void);
     
     public:
+        void complain(std::string level);
         ~Harl();
         Harl();
-        void complain(std::string level);
 };
 
 typedef void (Harl::*t_func) (void);

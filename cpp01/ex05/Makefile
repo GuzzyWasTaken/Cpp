@@ -1,10 +1,10 @@
 CPP = g++
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-HDR = sed.hpp
-SRCS = main.cpp 
+HDR = harl.hpp
+SRCS = main.cpp harl.cpp
 OBJS = $(SRCS:.cpp=.o) 
-TARGET = sed
+TARGET = harl
 
 all: $(TARGET)
 

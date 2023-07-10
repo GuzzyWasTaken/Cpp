@@ -1,10 +1,10 @@
 CPP = g++
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-HDR = Phonebook.hpp
-SRCS = Phonebook.cpp  
+HDR = sed.hpp
+SRCS = main.cpp 
 OBJS = $(SRCS:.cpp=.o) 
-TARGET = Phonebook
+TARGET = sed
 
 all: $(TARGET)
 
