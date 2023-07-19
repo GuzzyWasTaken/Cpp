@@ -1,8 +1,5 @@
 #include "Fixed.hpp"
 
-//Roundf just rounds a nmber
-//
-
 Fixed::Fixed(void)
 {
     std::cout << "Default constructor called" << std::endl;
@@ -62,4 +59,74 @@ void Fixed::setRawBits(int const raw)
 {
     std::cout << "set raw bits to:" << raw << std::endl;
     this->value = raw;
+}
+
+bool operator>(const Fixed& other) const 
+{
+    return value > other.value;
+}
+
+bool operator<(const Fixed& other) const 
+{
+    return value < other.value;
+}
+
+bool operator>=(const Fixed& other) const 
+{
+    return value >= other.value;
+}
+
+bool operator<=(const Fixed& other) const 
+{
+    return value <= other.value;
+}
+
+bool operator==(const Fixed& other) const 
+{
+    return value == other.value;
+}
+
+bool operator!=(const Fixed& other) const 
+{
+    return value != other.value;
+}
+
+Fixed operator+(const Fixed& other) const 
+{
+    return Fixed(toFloat() + other.toFloat());
+}
+
+Fixed operator-(const Fixed& other) const 
+{
+    return Fixed(toFloat() - other.toFloat());
+}
+
+Fixed operator*(const Fixed& other) const 
+{
+    return Fixed(toFloat() * other.toFloat());
+}
+
+Fixed operator/(const Fixed& other) const 
+{
+    return Fixed(toFloat() / other.toFloat());
+}
+
+int Fixed::min(int &A, int &B)
+{
+    return A > B ? B : A;
+}
+
+int Fixed::min(const int &A, const int &B)
+{
+    return A > B ? B : A;
+}
+
+int Fixed::max(int &A, int &B)
+{
+    return A < B ? B : A;
+}
+
+int Fixed::max(const int &A, const int &B)
+{
+    return A < B ? B : A;
 }
