@@ -1,10 +1,10 @@
 CPP = g++
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-HDR = ClapTrap.hpp ScavTrap.hpp
-SRCS = ClapTrap.cpp main.cpp ScavTrap.cpp
+HDR = Polymorph.hpp 
+SRCS = Polymorph.cpp main.cpp Dog.cpp Cat.cpp Brain.cpp
 OBJS = $(SRCS:.cpp=.o) 
-TARGET = ClapTrap
+TARGET = Polymorph
 
 all: $(TARGET)
 

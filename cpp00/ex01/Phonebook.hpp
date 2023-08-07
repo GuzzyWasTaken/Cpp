@@ -6,7 +6,7 @@
 /*   By: auzochuk <auzochuk@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/02 14:52:57 by auzochuk      #+#    #+#                 */
-/*   Updated: 2023/07/14 18:45:27 by auzochuk      ########   odam.nl         */
+/*   Updated: 2023/08/03 17:19:14 by auzochuk      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <iostream>
 
-class t_Booklet
+class t_Booklet // todo: change to Contact
 {
 public:
     std::string Name;

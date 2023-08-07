@@ -1,33 +1,23 @@
-#include "ClapTrap.hpp"
-#include "ScavTrap.hpp"
+#include "Polymorph.hpp"
 
-int    main(void)
+int main()
 {
-    ClapTrap axton("Axton");
-    ClapTrap krieg("Krieg");
+    const int numAnimals = 10;
+    Animal* animals[numAnimals];
 
-    axton.attack("Krieg");
-    krieg.takeDamage(5);
-    krieg.attack("Axton");
-    axton.takeDamage(0);
-    krieg.beRepaired(3);
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
+    for (int i = 0; i < numAnimals / 2; ++i)
+    {
+        animals[i] = new Dog();
+    }
 
-
-    return (0);
+    for (int i = numAnimals / 2; i < numAnimals; ++i)
+    {
+        animals[i] = new Cat();
+    }
+    // Delete all animals
+    for (int i = 0; i < numAnimals; ++i)
+    {
+        delete animals[i];
+    }
+    return 0;
 }

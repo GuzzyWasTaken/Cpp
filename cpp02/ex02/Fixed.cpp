@@ -13,7 +13,7 @@ Fixed::Fixed(const float flNumber) : value (std::roundf(flNumber *(1 << fraction
 {
     std::cout << "Float constructor called" << std::endl
 }
-
+            
 Fixed::~Fixed()
 {
     std::cout << "Deconstructing" << std::endl;

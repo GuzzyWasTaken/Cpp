@@ -1,8 +1,8 @@
 CPP = g++
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-HDR = Polymorph.hpp 
-SRCS = Polymorph.cpp main.cpp Dog.cpp Cat.cpp Brain.cpp
+HDR = Bureaucrat.hpp 
+SRCS = Bureaucrat.cpp, main.cpp
 OBJS = $(SRCS:.cpp=.o) 
 TARGET = Polymorph
 

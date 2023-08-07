@@ -13,15 +13,24 @@ class Animal
         std::string _Type;
     
     public:
-        Animal();
-        Animal(const Animal &Anim);
         Animal &operator=(const Animal &other);
-        virtual ~Animal();
+        virtual ~Animal() = 0;
         virtual void makeSound() const = 0;
+};
+
+class Brain
+{
+    private:
+        std::string _Ideas[100];
+    public:
+        Brain();
+        ~Brain();
 };
 
 class Dog : public Animal
 {
+    private:
+        Brain *_brain;
     public:
         Dog();
         ~Dog();
@@ -30,12 +39,13 @@ class Dog : public Animal
 
 class Cat : public Animal
 {
+    private:
+        Brain *_brain;
     public:
         Cat();
         ~Cat();
         void makeSound() const ;
 };
-
 
 
 #endif
