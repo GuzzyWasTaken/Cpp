@@ -15,9 +15,11 @@
 
 # include <iostream>
 
-class t_Booklet // todo: change to Contact
+class t_Booklet
 {
 public:
+    t_Booklet();
+    ~t_Booklet();
     std::string Name;
     std::string LastName;
     std::string nickname;
@@ -30,6 +32,8 @@ public:
 class PhoneBook
 {
     public:
+        PhoneBook();
+        ~PhoneBook();
         int     NumberOfContacts;
         t_Booklet Booklet[8];
 };

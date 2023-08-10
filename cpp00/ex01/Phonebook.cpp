@@ -80,7 +80,7 @@ void SearchContacts(PhoneBook Phonebook)
 		}
 		if (Index >= 0 && Index <= Phonebook.NumberOfContacts)
 		{
-			PrintContact(Phonebook.Booklet[Index]);
+			PrintContact(Phonebook.Booklet[Index - 1]);
 			break;
 		}
 	}
@@ -96,7 +96,8 @@ void AddContact(PhoneBook &Phonebook)
 	if (Phonebook.NumberOfContacts == 8)
 		index = 1;
 	else
-		index = Phonebook.NumberOfContacts;
+		index = PhoneBook.NumberOfContacts;
+		//index = (Phonebook.NumberOfContacts == 0) ? index = 1 : index = Phonebook.NumberOfContacts;
 	std::cout << "Name:" ;
 	if (!std::getline(std::cin, Phonebook.Booklet[index].Name) || Phonebook.Booklet[index].Name.empty())
 	{
