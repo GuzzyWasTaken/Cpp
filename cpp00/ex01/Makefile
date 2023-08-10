@@ -1,8 +1,8 @@
 CPP = g++
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-HDR = Phonebook.hpp
-SRCS = Phonebook.cpp  
+HDR = Phonebook.hpp Booklet.hpp
+SRCS = Phonebook.cpp Phoney.cpp Booklet.cpp
 OBJS = $(SRCS:.cpp=.o) 
 TARGET = Phonebook
 

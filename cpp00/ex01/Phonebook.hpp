@@ -6,40 +6,29 @@
 /*   By: auzochuk <auzochuk@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/02 14:52:57 by auzochuk      #+#    #+#                 */
-/*   Updated: 2023/08/03 17:19:14 by auzochuk      ########   odam.nl         */
+/*   Updated: 2023/08/10 19:57:28 by auzochuk      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-# define PHONEBOOK_HPP
-
+#ifndef PHONEBOOK_H
+#define PHONEBOOK_H
 # include <iostream>
+#include "Booklet.hpp"
+#include <cstdlib>
+#include <cstring>
+#include <iomanip>
 
-class t_Booklet // todo: change to Contact
-{
-public:
-    std::string Name;
-    std::string LastName;
-    std::string nickname;
-    std::string PhoneNumber;
-    std::string DarkSecret;
-    
-    int index;
-};
 
 class PhoneBook
 {
-    public:
-        int     NumberOfContacts;
-        t_Booklet Booklet[8];
+public:
+    void AdContact(const std::string& name, const std::string& lastName,
+                    const std::string& nickname, const std::string& phoneNumber,
+                    const std::string& darkSecret, int index);
+    PhoneBook();
+    ~PhoneBook();
+    int NumberOfContacts;
+    t_Booklet Booklet[8];
 };
 
-#endif
-
-
-
-
-
-
-
-//phonebook structure |          | 10 wide 4 columns 
+#endif // PHONEBOOK_H

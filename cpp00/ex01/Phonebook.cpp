@@ -6,67 +6,32 @@
 /*   By: auzochuk <auzochuk@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/02 14:51:04 by auzochuk      #+#    #+#                 */
-/*   Updated: 2023/07/14 18:19:05 by auzochuk      ########   odam.nl         */
+/*   Updated: 2023/08/10 20:16:35 by auzochuk      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sstream>
 #include "Phonebook.hpp"
+#include "Booklet.hpp"
 #include <cstdlib>
 #include <cstring>
 #include <iomanip>
 
-void FormatPrint(const std::string str)
-{
-    if (str.length() < 10)
-        std::cout << std::setw(10) << std::right << str;
-    else if (str.length() > 10)
-    {
-        std::string modifiedStr = str.substr(0, 10);
-        modifiedStr.replace(9, 1, ".");
-        std::cout << modifiedStr;
-    }
-    else
-        std::cout << str;
-}
-void PrintContact(t_Booklet Contact)
-{
-	std::cout << "Name:" << Contact.Name << std::endl;
-	std::cout << "Last name:" << Contact.LastName << std::endl;
-	std::cout << "Nickame:" << Contact.nickname << std::endl;
-	std::cout << "Index:" << Contact.index + 1 << std::endl;
-	std::cout << "Phone Number:" << Contact.PhoneNumber << std::endl;
-	std::cout << "Darkest Secret:" << Contact.DarkSecret << std::endl;
-	
-}
-
-void PrintLine(PhoneBook &Phonebook, int Index)
-{
-	std::cout << "|    ";
-	std::cout << Index;
-	std::cout << "     |";
-	FormatPrint(Phonebook.Booklet[Index].Name);
-	std::cout << "|";
-	FormatPrint(Phonebook.Booklet[Index].LastName);
-	std::cout << "|";
-	FormatPrint(Phonebook.Booklet[Index].nickname);
-	std::cout << "|" << std::endl;
-}
 
 void SearchContacts(PhoneBook Phonebook)
 {
-    std::cout << "|  Index   |First Name|Last Name |Nickname  |" << std::endl;
-	std::cout << "|----------|----------|----------|----------|" << std::endl;
+	std::cout << "\033[1;38;5;208m|  Index   |First Name|Last Name |Nickname  |\033[0m" << std::endl;
+	std::cout << "\033[1;38;5;208m|----------|----------|----------|----------|\033[0m" << std::endl;
 	for(int i = 0; i < Phonebook.NumberOfContacts; i++)
 	{
 		if (Phonebook.NumberOfContacts == 0)
 			break;
-		PrintLine(Phonebook, i);
+		Phonebook.Booklet[i].PrintLine(i);
 	}
 	while(1)
 	{
 		std::string Input;
-		std::cout << "Search:";
+		std::cout << "\033[1;34mSearch:\033[0m";
 		std::getline(std::cin ,Input);
 		int Index;
 		try 
@@ -75,74 +40,69 @@ void SearchContacts(PhoneBook Phonebook)
 		}
 		catch(std::invalid_argument & e)
 		{
-			std::cout << "Must be numerical value" << std::endl;
+			std::cout << "\033[1;31m Value must be numerical \033[0m" << std::endl;
 			continue;
 		}
-		if (Index >= 0 && Index <= Phonebook.NumberOfContacts)
+		if (Index >= 1 && Index <= Phonebook.NumberOfContacts)
 		{
-			PrintContact(Phonebook.Booklet[Index]);
+			Phonebook.Booklet[Index - 1].PrintContact();
 			break;
 		}
+		else
+			std::cout << "\033[1;31m invalid input \033[0m\n";
 	}
 	
 }
 
-//todo check if empty
 void AddContact(PhoneBook &Phonebook)
 {
-	int index = 0;
-	long PhoneNumber = 0;
+    int index = 0;
+    while (true)
+    {
+        if (Phonebook.NumberOfContacts == 8)
+            index = 0;
+        else
+            index = Phonebook.NumberOfContacts;
+        std::string name, lastName, nickname, phoneNumber, darkSecret;
 
-	if (Phonebook.NumberOfContacts == 8)
-		index = 1;
-	else
-		index = Phonebook.NumberOfContacts;
-	std::cout << "Name:" ;
-	if (!std::getline(std::cin, Phonebook.Booklet[index].Name) || Phonebook.Booklet[index].Name.empty())
-	{
-		std::cout << "Field must be filled in" << std::endl;
-		return;
-	}
- 	std::cout << "Last Name: ";
-    if (!std::getline(std::cin, Phonebook.Booklet[index].LastName) || Phonebook.Booklet[index].LastName.empty()) {
-        std::cout << "Field must be filled in" << std::endl;
-        return;
-    }
+        std::cout << "\033[1;34mName: \033[0m";
+        if (!std::getline(std::cin, name) || name.empty())
+        {
+            std::cout << "\033[1;31m Field must be filled in \033[0m" << std::endl;
+            continue;
+        }
 
-    std::cout << "Nickname: ";
-    if (!std::getline(std::cin, Phonebook.Booklet[index].nickname) || Phonebook.Booklet[index].nickname.empty()) {
-        std::cout << "Field must be filled in" << std::endl;
-        return;
-    }
+        std::cout << "\033[1;34mLast Name: \033[0m";
+        if (!std::getline(std::cin, lastName) || lastName.empty())
+        {
+            std::cout << "\033[1;31m Field must be filled in \033[0m" << std::endl;
+            continue;
+        }
 
-    std::cout << "Phone Number: ";
-    if (!std::getline(std::cin, Phonebook.Booklet[index].PhoneNumber) || Phonebook.Booklet[index].PhoneNumber.empty()) {
-        std::cout << "Field must be filled in" << std::endl;
-        return;
-    }
+        std::cout << "\033[1;34mNickname: \033[0m";
+        if (!std::getline(std::cin, nickname) || nickname.empty())
+        {
+            std::cout << "\033[1;31m Field must be filled in \033[0m" << std::endl;
+            continue;
+        }
 
-    std::cout << "Darkest Secret: ";
-    if (!std::getline(std::cin, Phonebook.Booklet[index].DarkSecret) || Phonebook.Booklet[index].DarkSecret.empty()) {
-        std::cout << "Field must be filled in" << std::endl;
-        return;
+        std::cout << "\033[1;34mPhone Number: \033[0m";
+        if (!std::getline(std::cin, phoneNumber) || phoneNumber.empty())
+        {
+            std::cout << "\033[1;31m Field must be filled in \033[0m" << std::endl;
+            continue;
+        }
+
+        std::cout << "\033[1;34mDarkest Secret: \033[0m";
+        if (!std::getline(std::cin, darkSecret) || darkSecret.empty())
+        {
+            std::cout << "\033[1;31m Field must be filled in \033[0m" << std::endl;
+            continue;
+        }
+
+        Phonebook.AdContact(name, lastName, nickname, phoneNumber, darkSecret, index);
+        break;
     }
-	try 
-	{
-		PhoneNumber = std::stoi(Phonebook.Booklet[index].PhoneNumber, NULL);
-	}
-	catch(std::invalid_argument & e)
-	{
-		std::cout << "Must be numerical value, Add contact again." << std::endl;
-		return;
-	}
-	std::cout << "Darkest Secret:";
-	std::getline(std::cin, Phonebook.Booklet[index].DarkSecret);
-	Phonebook.Booklet[index].index = index;
-	if (Phonebook.NumberOfContacts < 8)
-		Phonebook.NumberOfContacts += 1;
-	std::cout << "made contact in element: " << (index - 1) << "proof: " << Phonebook.Booklet[index].Name << std::endl;
-	
-	
 }
 
 int main()
@@ -150,21 +110,28 @@ int main()
 	PhoneBook Phonebook;
 	
 	Phonebook.NumberOfContacts = 0;
-	memset(Phonebook.Booklet, 0, sizeof(Phonebook.Booklet));
 	std::string Input;
 	std::cout << "Welcome to my Phonebook" << std::endl;
 	while(Input != "EXIT")
 	{
-		std::cout << "COMMANDS [SEARCH] [ADD] [EXIT]:";
+		std::cout << "\033[1;34m COMMANDS:\033[0m [SEARCH] \033[1;32m[ADD]\033[0m \033[1;31m[EXIT]\033[0m:";
 		if (!std::getline(std::cin, Input))
 		{
-			std::cout << "EOF detected" << std::endl;
+			std::cout << "\033[1;31m EOF DETECTED \033[0m" << std::endl;
+
 			exit (0);
 		}
 		if (Input == "EXIT")
 			return(0);
 		if (Input == "SEARCH")
+		{
+			if (Phonebook.NumberOfContacts == 0)
+			{
+				std::cout << "\033[1;31m Please add a contact before searching \033[0m" << std::endl;
+				continue;
+			}
 			SearchContacts(Phonebook);
+		}
 		if(Input == "ADD")
 			AddContact(Phonebook);
 	}
