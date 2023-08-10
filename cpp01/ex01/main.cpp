@@ -1,7 +1,6 @@
 #include "Zombie.hpp"
 
-
- void Zombie :: addName(std::string str)
+void Zombie :: addName(std::string str)
  {
     name = str;
  }
