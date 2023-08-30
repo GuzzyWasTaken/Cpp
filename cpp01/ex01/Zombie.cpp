@@ -1,9 +1,14 @@
 #include "Zombie.hpp"
 
-Zombie::Zombie(std::string name)
+Zombie::Zombie()
 {
-    this->_name = name;
 }
+
+void Zombie::addName(std::string str)
+{
+    _name = str;
+}
+
 
 Zombie::~Zombie()
 {

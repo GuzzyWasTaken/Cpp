@@ -2,7 +2,7 @@ CPP = g++
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
 HDR = Zombie.hpp 
-SRCS = main.cpp
+SRCS = main.cpp newZombie.cpp Zombie.cpp randomChump.cpp zombiehorde.cpp 
 OBJS = $(SRCS:.cpp=.o) 
 TARGET = Polymorph
 
@@ -15,11 +15,12 @@ $(TARGET): $(OBJS) $(HDR)
 	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS)
 
-re:
-	clean
-	all
+fclean: clean
+	rm -f $(TARGET)
+
+re: fclean all
 
 zoro:
 	@printf "\n"

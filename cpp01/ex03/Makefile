@@ -6,31 +6,33 @@
 #    By: auzochuk <auzochuk@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/05/01 19:26:22 by auzochuk      #+#    #+#                  #
-#    Updated: 2023/05/02 15:30:45 by auzochuk      ########   odam.nl          #
+#    Updated: 2023/08/30 16:27:28 by auzochuk      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 CPP = g++
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRCS = main.cpp 
-OBJS = $(SRCS:.cpp=.o)
-TARGET = Violence
+HDR = Zombie.hpp HumanA.hpp HumanA.hpp Weapon.hpp
+SRCS = main.cpp HumanA.cpp HumanB.cpp Weapon.cpp 
+OBJS = $(SRCS:.cpp=.o) 
+TARGET = violence
 
 all: $(TARGET)
 
-$(TARGET): $(OBJS)
-	$(CPP) $(CPPFLAGS) $< -o $@
+$(TARGET): $(OBJS) $(HDR)
+	$(CPP) $(CPPFLAGS) $(OBJS) -o $(TARGET)
 
 %.o: %.cpp
 	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS)
 
-re:
-	clean
-	all
+fclean: clean
+	rm -f $(TARGET)
+
+re: fclean all
 
 zoro:
 	@printf "\n"
