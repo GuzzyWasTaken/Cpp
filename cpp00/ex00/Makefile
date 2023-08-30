@@ -14,11 +14,12 @@ $(TARGET): $(OBJS)
 	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS)
 
-re:
-	clean
-	all
+fclean: clean
+	rm -f $(TARGET)
+
+re: fclean all
 
 zoro:
 	@printf "\n"

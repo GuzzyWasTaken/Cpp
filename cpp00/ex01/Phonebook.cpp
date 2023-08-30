@@ -6,7 +6,7 @@
 /*   By: auzochuk <auzochuk@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/02 14:51:04 by auzochuk      #+#    #+#                 */
-/*   Updated: 2023/08/10 20:29:14 by auzochuk      ########   odam.nl         */
+/*   Updated: 2023/08/16 17:24:43 by auzochuk      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,12 @@ void SearchContacts(PhoneBook Phonebook)
 	
 }
 
+
 void AddContact(PhoneBook &Phonebook)
 {
-    int index = 0;
     while (true)
     {
-        if (Phonebook.NumberOfContacts == 8)
-            index = 0;
-        else
-            index = Phonebook.NumberOfContacts;
         std::string name, lastName, nickname, phoneNumber, darkSecret;
-
         std::cout << "\033[1;34mName: \033[0m";
         if (!std::getline(std::cin, name) || name.empty())
         {
@@ -99,8 +94,7 @@ void AddContact(PhoneBook &Phonebook)
             std::cout << "\033[1;31m Field must be filled in \033[0m" << std::endl;
             continue;
         }
-
-        Phonebook.AdContact(name, lastName, nickname, phoneNumber, darkSecret, index);
+        Phonebook.AdContact(name, lastName, nickname, phoneNumber, darkSecret, Phonebook.ContactCounter);
         break;
     }
 }
@@ -114,7 +108,7 @@ int main()
 	std::cout << "Welcome to my Phonebook" << std::endl;
 	while(Input != "EXIT")
 	{
-		std::cout << "\033[1;34m COMMANDS:\033[0m [SEARCH] \033[1;32m[ADD]\033[0m \033[1;31m[EXIT]\033[0m:";
+		std::cout << "\033[1;34m COMMANDS:\033[0m \033[1;220m[SEARCH]\033[0m \033[1;32m[ADD]\033[0m \033[1;31m[EXIT]\033[0m:";
 		if (!std::getline(std::cin, Input))
 		{
 			std::cout << "\033[1;31m EOF DETECTED \033[0m" << std::endl;

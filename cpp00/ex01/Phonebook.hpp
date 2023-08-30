@@ -28,6 +28,7 @@ public:
     PhoneBook();
     ~PhoneBook();
     int NumberOfContacts;
+    int ContactCounter;
     t_Booklet Booklet[8];
 };
 

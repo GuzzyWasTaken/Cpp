@@ -1,12 +1,9 @@
 #include "Phonebook.hpp"
 #include "Booklet.hpp"
 
-PhoneBook::PhoneBook()
-    : NumberOfContacts(0)
+PhoneBook::PhoneBook() : NumberOfContacts(0) , ContactCounter(0)
 {
-        for (int i = 0; i < 8; i++) {
-        Booklet[i] = t_Booklet("", "", "", "", "", -1); // Provide default values
-    }
+
 }
 
 PhoneBook::~PhoneBook()
@@ -18,8 +15,13 @@ void PhoneBook::AdContact(const std::string& name, const std::string& lastName,
                     const std::string& darkSecret, int index)
 {
     Booklet[index] = t_Booklet(name, lastName, nickname, phoneNumber, darkSecret, index);
-    if (NumberOfContacts == 8)
+    std::cout << "created at index: " << index << std::endl;
+    ContactCounter++;
+    if (NumberOfContacts < 8)
+        NumberOfContacts++;
+    if (ContactCounter == 8)
+    {
+        ContactCounter = 0;
         return;
-    NumberOfContacts++;
-
+    }
 }
