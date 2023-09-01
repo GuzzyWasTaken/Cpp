@@ -40,7 +40,7 @@ Fixed& Fixed::operator=(const Fixed& other)
     return *this;
 }
 
-int toInt(void) const
+int Fixed::toInt(void) const
 {
     return(value << fractionalBits)
 }
@@ -51,7 +51,7 @@ int Fixed::getRawBits(void) const
     return(this->value);
 }
 
-Fixed &Fixed::operator<<(std::ostream &out, const Fixed& fixed))
+std::ostream &operator<<(std::ostream &out, const Fixed& fixed)
 {
     std::cout << "operator << overloaded" << std::endl;
     out << fixed.toFloat();

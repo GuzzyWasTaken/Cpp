@@ -48,7 +48,7 @@ int Fixed::getRawBits(void) const
     return(this->value);
 }
 
-Fixed &Fixed::operator<<(std::ostream &out, const Fixed& fixed))
+std::ostream &operator<<(std::ostream &out, const Fixed& fixed)
 {
     std::cout << "operator << overloaded" << std::endl;
     out << fixed.toFloat();
@@ -60,33 +60,32 @@ void Fixed::setRawBits(int const raw)
     std::cout << "set raw bits to:" << raw << std::endl;
     this->value = raw;
 }
-
-bool operator>(const Fixed& other) const 
+bool &Fixed::operator>(const Fixed& other) const  
 {
     return value > other.value;
 }
 
-bool operator<(const Fixed& other) const 
+bool &Fixed::operator<(const Fixed& other) const 
 {
     return value < other.value;
 }
 
-bool operator>=(const Fixed& other) const 
+bool &Fixed::operator>=(const Fixed& other) const 
 {
     return value >= other.value;
 }
 
-bool operator<=(const Fixed& other) const 
+bool &Fixed::operator<=(const Fixed& other) const 
 {
     return value <= other.value;
 }
 
-bool operator==(const Fixed& other) const 
+bool &Fixed::operator==(const Fixed& other) const 
 {
     return value == other.value;
 }
 
-bool operator!=(const Fixed& other) const 
+bool &Fixed::operator!=(const Fixed& other) const 
 {
     return value != other.value;
 }

@@ -18,7 +18,6 @@ public:
     Fixed(const int num);
     Fixed(const float flNumber);
     Fixed(const Fixed &other);
-    Fixed &operator<<(const Fixed &other);
     float toFloat(void) const;
     int toInt(void) const;
     Fixed &operator=(const Fixed &other);
@@ -28,5 +27,7 @@ public:
     int getRawBits(void) const;
     void setRawBits(int const raw);
 };
+
+std::ostream &operator<<(std::ostream &out, const Fixed& fixed);
 
 #endif
