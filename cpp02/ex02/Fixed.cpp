@@ -9,9 +9,9 @@ Fixed::Fixed(const int num) : value(num << fractionalBits)
 {
     std::cout << "constructer made" << std::endl;
 }
-Fixed::Fixed(const float flNumber) : value (std::roundf(flNumber *(1 << fractionalBits)))
+Fixed::Fixed(const float flNumber) : value (roundf(flNumber *(1 << fractionalBits)))
 {
-    std::cout << "Float constructor called" << std::endl
+    std::cout << "Float constructor called" << std::endl;
 }
             
 Fixed::~Fixed()
@@ -27,19 +27,14 @@ Fixed::Fixed(const Fixed& other)
 }
 int Fixed::toInt(void) const
 {
-   return(value / (1 << fractionalBits))
+   return(this->value / (1 << fractionalBits));
 }
 
-Fixed& Fixed::operator=(const Fixed& other)
+bool &Fixed::operator=(const Fixed &other) const
 {
     std::cout << "operator overloaded" << std::endl;
     this->value = other.value;
     return *this;
-}
-
-int toInt(void) const
-{
-    return(value << fractionalBits)
 }
 
 int Fixed::getRawBits(void) const
@@ -62,17 +57,17 @@ void Fixed::setRawBits(int const raw)
 }
 bool &Fixed::operator>(const Fixed& other) const  
 {
-    return value > other.value;
+    return this->value > other.value;
 }
 
 bool &Fixed::operator<(const Fixed& other) const 
 {
-    return value < other.value;
+    return this->value < other.value;
 }
 
 bool &Fixed::operator>=(const Fixed& other) const 
 {
-    return value >= other.value;
+    return this->value >= other.value;
 }
 
 bool &Fixed::operator<=(const Fixed& other) const 

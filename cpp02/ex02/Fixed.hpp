@@ -6,6 +6,7 @@
 # include <iomanip>
 # include <fstream>
 # include <iostream>
+# include <cmath>
 
 class Fixed
 {
@@ -34,7 +35,6 @@ public:
     bool &operator+(const Fixed& other) const;
     bool &operator/(const Fixed& other) const;
     bool &operator*(const Fixed& other) const;
-    bool &operator+(const Fixed& other) const;
     bool &operator-(const Fixed& other) const;
 
     int min(int &A, int &B);

@@ -6,6 +6,7 @@
 # include <iomanip>
 # include <fstream>
 # include <iostream>
+# include <cmath>
 
 class Fixed
 {
