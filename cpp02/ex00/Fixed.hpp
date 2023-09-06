@@ -14,7 +14,7 @@ private:
     static const int fractionalBits = 8;
 
 public:
-    Fixed();
+    Fixed(void);
     Fixed(const Fixed& other);
     Fixed& operator=(const Fixed& other);
     Fixed& operator=(int& other);

@@ -3,9 +3,9 @@
 //Roundf just rounds a nmber
 //
 
-Fixed::Fixed(void)
+Fixed::Fixed(void) : value(0)
 {
-    std::cout << "Default constructor called" << std::endl;
+   // std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const int num) : value(num << fractionalBits)
