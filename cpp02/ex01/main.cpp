@@ -1,30 +1,23 @@
 #include <iostream>
 #include "Fixed.hpp"
 
-int main()
-{
-    Fixed a;
-    Fixed b(42);
-    Fixed c(42.42f);
-    Fixed d(b);
+int main(void) {
 
-    std::cout << "a: " << a << std::endl;
-    std::cout << "b: " << b << std::endl;
-    std::cout << "c: " << c << std::endl;
-    std::cout << "d: " << d << std::endl;
+    Fixed       a;
+    Fixed const b( 10 );
+    Fixed const c( 42.42f );
+    Fixed const d( b );
 
-    std::cout << "a as integer: " << a.toInt() << std::endl;
-    std::cout << "b as integer: " << b.toInt() << std::endl;
-    std::cout << "c as integer: " << c.toInt() << std::endl;
-    std::cout << "d as integer: " << d.toInt() << std::endl;
+    a = Fixed( 1234.4321f );
+    std::cout << "a is " << a << std::endl;
+    std::cout << "b is " << b << std::endl;
+    std::cout << "c is " << c << std::endl;
+    std::cout << "d is " << d << std::endl;
 
-    std::cout << "a as float: " << a.toFloat() << std::endl;
-    std::cout << "b as float: " << b.toFloat() << std::endl;
-    std::cout << "c as float: " << c.toFloat() << std::endl;
-    std::cout << "d as float: " << d.toFloat() << std::endl;
-
-    a = c;
-    std::cout << "a after assignment: " << a << std::endl;
+    std::cout << "a is " << a.toInt() << " as integer" << std::endl;
+    std::cout << "b is " << b.toInt() << " as integer" << std::endl;
+    std::cout << "c is " << c.toInt() << " as integer" << std::endl;
+    std::cout << "d is " << d.toInt() << " as integer" << std::endl;
 
     return 0;
 }

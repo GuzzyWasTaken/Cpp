@@ -10,7 +10,7 @@ Fixed::Fixed(void)
 
 Fixed::Fixed(const int num) : value(num << fractionalBits)
 {
-    std::cout << "constructer made" << std::endl;
+    std::cout << "constructor made" << std::endl;
 }
 Fixed::Fixed(const float flNumber) : value (roundf(flNumber *(1 << fractionalBits)))
 {
@@ -19,9 +19,8 @@ Fixed::Fixed(const float flNumber) : value (roundf(flNumber *(1 << fractionalBit
 
 float Fixed::toFloat(void) const
 {
-    return((value) / (1 << fractionalBits));
+    return static_cast<float>( this->getRawBits() ) / ( 1 << fractionalBits );
 }
-
 Fixed::~Fixed()
 {
     std::cout << "Deconstructing" << std::endl;
