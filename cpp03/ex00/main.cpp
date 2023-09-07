@@ -1,32 +1,26 @@
 #include "ClapTrap.hpp"
 
-int    main(void)
+
+int main() 
 {
-    ClapTrap axton("Axton");
-    ClapTrap krieg("Krieg");
+    ClapTrap clap1("Player1"); // Create an instance of ClapTrap with a custom name
+    ClapTrap clap2; // Create another instance of ClapTrap with the default name
 
-    axton.attack("Krieg");
-    krieg.takeDamage(5);
-    krieg.attack("Axton");
-    axton.takeDamage(0);
-    krieg.beRepaired(3);
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
+    // Display initial stats
+
+    // Perform actions
+    clap1.attack("Enemy1");
+    clap2.attack("Enemy2");
+
+   // clap1.takeDamage(5);
+    clap2.takeDamage(5);
+   // clap1.takeDamage(5);
+    clap2.takeDamage(5);
+    clap2.attack("clappy");
+
+    clap1.beRepaired(3);
+    clap2.beRepaired(2);
 
 
-    return (0);
+    return 0;
 }

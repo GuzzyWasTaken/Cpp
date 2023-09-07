@@ -19,12 +19,12 @@ void ClapTrap::takeDamage(unsigned int amount)
     _HP -= amount;
 }
 
-ClapTrap::ClapTrap(std::string Name): _Name(Name), _HP(10), _AD(0), _Mana(10)
+ClapTrap::ClapTrap(std::string Name): _Name(Name), _HP(10), _AD(5), _Mana(10)
 {
 
 }
 
-ClapTrap::ClapTrap(): _Name("john"), _HP(10), _AD(0), _Mana(10)
+ClapTrap::ClapTrap(): _Name("Clap"), _HP(10), _AD(5), _Mana(10)
 {
 
 }

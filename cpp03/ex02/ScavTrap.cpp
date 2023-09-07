@@ -1,4 +1,4 @@
-#include "ScavTrap.h"
+#include "ScavTrap.hpp"
 #include "ClapTrap.hpp"
 
 
