@@ -3,10 +3,8 @@
 
 int main() 
 {
-    ClapTrap clap1("Player1"); // Create an instance of ClapTrap with a custom name
-    ClapTrap clap2; // Create another instance of ClapTrap with the default name
-
-    // Display initial stats
+    ClapTrap clap1("Player1");
+    ClapTrap clap2;
 
     // Perform actions
     clap1.attack("Enemy1");

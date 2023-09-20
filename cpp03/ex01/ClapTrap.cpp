@@ -31,7 +31,7 @@ ClapTrap::ClapTrap(): _Name("john"), _HP(10), _AD(0), _Mana(10)
 
 ClapTrap::~ClapTrap()
 {
-    std::cout << "Deconstructor called" << std::endl;
+    std::cout << "ClapTrap " << _Name <<" Deconstructor called" << std::endl;
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &other)

@@ -3,31 +3,23 @@
 
 int    main(void)
 {
-    ClapTrap axton("Axton");
-    ClapTrap krieg("Krieg");
+        ClapTrap clap("Clap");
+        ScavTrap scav("Scav");
 
-    axton.attack("Krieg");
-    krieg.takeDamage(5);
-    krieg.attack("Axton");
-    axton.takeDamage(0);
-    krieg.beRepaired(3);
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
-    krieg.attack("Axton");
+        // Calling the ClapTrap attack function
+        clap.attack("Target1");
+        clap.takeDamage(5);
+        clap.beRepaired(3);
 
+        // Calling the ScavTrap attack and guardGate functions
+        scav.attack("Target2");
+        scav.takeDamage(10);
+        scav.beRepaired(2);
+        scav.guardGate();
+
+        // Polymorphism: Using a ScavTrap object as a ClapTrap
+        ClapTrap* ptrToClapTrap = &scav;
+        ptrToClapTrap->attack("Target3");
 
     return (0);
 }
