@@ -1,24 +1,30 @@
 #include "Bureaucrat.hpp"
 
-int main()
-{
-    try
+int main() {
+    try {
+        // Create Bureaucrat objects with valid and invalid grades
+        Bureaucrat bureaucrat1("Alice", 75); // Valid grade
+        Bureaucrat bureaucrat2("Bob", 0);   // Invalid grade (too low)
+        Bureaucrat bureaucrat3("Charlie", 160); // Invalid grade (too high)
+
+        // Display bureaucrat information
+        std::cout << "Bureaucrat 1 - Name: " << bureaucrat1.getName() << ", Grade: " << bureaucrat1.getGrade() << std::endl;
+        std::cout << "Bureaucrat 2 - Name: " << bureaucrat2.getName() << ", Grade: " << bureaucrat2.getGrade() << std::endl;
+        std::cout << "Bureaucrat 3 - Name: " << bureaucrat3.getName() << ", Grade: " << bureaucrat3.getGrade() << std::endl;
+
+        // Increment and decrement grades
+        bureaucrat1.IncrementGrade();
+        bureaucrat2.DecrementGrade();
+
+        // Display updated grades
+        std::cout << "\nUpdated Grades:" << std::endl;
+        std::cout << "Bureaucrat 1 - Name: " << bureaucrat1.getName() << ", Grade: " << bureaucrat1.getGrade() << std::endl;
+        std::cout << "Bureaucrat 2 - Name: " << bureaucrat2.getName() << ", Grade: " << bureaucrat2.getGrade() << std::endl;
+
+    } 
+    catch (const std::string &e)
     {
-        Bureaucrat bureaucrat("John Doe", 3);
-        std::cout << bureaucrat << std::endl;
-
-        bureaucrat.incrementGrade();
-        std::cout << bureaucrat << std::endl;
-
-        bureaucrat.decrementGrade();
-        std::cout << bureaucrat << std::endl;
-
-        // This will throw an exception since the grade cannot go below 1
-        bureaucrat.decrementGrade();
-    }
-    catch (const std::exception& e)
-    {
-        std::cerr << "Exception caught: " << e.what() << std::endl;
+        std::cerr << "Exception: " << e << '\n';
     }
 
     return 0;

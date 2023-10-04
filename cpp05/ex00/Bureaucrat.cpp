@@ -1,5 +1,7 @@
 #include "Bureaucrat.hpp"
 
+
+ //throw exception class
 int Bureaucrat::getGrade()
 {
     return (_Grade);
@@ -10,31 +12,31 @@ std::string Bureaucrat::getName()
     return(_Name);
 }
 
-void Bureaucrat::GradeTooHighException()
+std::string Bureaucrat::GradeTooHighException()
 {
     return "grade too high!";
 }
 
-void Bureaucrat::incrementGrade()
+std::string Bureaucrat::GradeTooLowException()
+{
+    return "grade too low!";
+}
+void Bureaucrat::IncrementGrade()
 {
     if (_Grade == 150)
         throw GradeTooHighException();
 
-    _grade++;
+    _Grade++;
 }
 
-void Bureaucrat::decrementGrade()
+void Bureaucrat::DecrementGrade()
 {
-    if (_grade == 1)
+    if (_Grade == 1)
         throw GradeTooLowException();
 
-    _grade--;
+    _Grade--;
 }
 
-void Bureaucrat::GradeTooLowException()
-{
-    return "grade too low!";
-}
 Bureaucrat::Bureaucrat(const std::string name, int grade) : _Name (name)
 {
     std::cout << "Bur constructor called" << std::endl;
@@ -53,9 +55,21 @@ Bureaucrat::Bureaucrat(const std::string name, int grade) : _Name (name)
     }
 }
 
+Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
+{
+    std::cout << "operator overloaded" << std::endl;
+    _Grade = other._Grade;
+    return *this;
+}
+
 Bureaucrat::~Bureaucrat()
 {
     std::cout << "Bur deconstructor called" << std::endl;
 
+}
+
+Bureaucrat::Bureaucrat()
+{
+     std::cout << "Bur constructor called" << std::endl;
 }
 

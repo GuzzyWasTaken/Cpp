@@ -2,9 +2,9 @@ CPP = g++
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
 HDR = Bureaucrat.hpp 
-SRCS = Bureaucrat.cpp, main.cpp
+SRCS = Bureaucrat.cpp main.cpp
 OBJS = $(SRCS:.cpp=.o) 
-TARGET = Polymorph
+TARGET = Bureaucrat
 
 all: $(TARGET)
 
@@ -16,6 +16,9 @@ $(TARGET): $(OBJS) $(HDR)
 
 clean:
 	rm -f $(OBJS) $(TARGET)
+
+fclean: clean
+	rm -f $(TARGET)
 
 re:
 	clean

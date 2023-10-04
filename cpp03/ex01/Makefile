@@ -4,7 +4,7 @@ CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 HDR = ClapTrap.hpp ScavTrap.hpp
 SRCS = ClapTrap.cpp main.cpp ScavTrap.cpp
 OBJS = $(SRCS:.cpp=.o) 
-TARGET = ClapTrap
+TARGET = ScavTrap
 
 all: $(TARGET)
 
@@ -16,6 +16,9 @@ $(TARGET): $(OBJS) $(HDR)
 
 clean:
 	rm -f $(OBJS) $(TARGET)
+
+fclean: clean
+	rm -f $(TARGET)
 
 re:
 	clean

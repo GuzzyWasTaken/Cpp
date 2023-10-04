@@ -23,9 +23,3 @@ Animal::Animal(const Animal &Clap)
     std::cout << "copy constructor made" << std::endl;
     *this = Clap;
 }
-
-
-
-
-
-

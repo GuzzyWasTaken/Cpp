@@ -4,17 +4,17 @@
 # include "ScavTrap.hpp"
 # include "ClapTrap.hpp"
 
-class FragTrap : public ScavTrap 
+class FragTrap : public ClapTrap
 {
     public:
         FragTrap(std::string Name);
-        FragTrap(const Fragtrap &other);
+        FragTrap(const FragTrap &other);
         FragTrap &operator=(const FragTrap &other);
         ~FragTrap();
         
-        void attack(const std::string &target) override;
+        void attack(const std::string &target);
         void highFiveGuys();
     private:
-}
+};
 
 #endif

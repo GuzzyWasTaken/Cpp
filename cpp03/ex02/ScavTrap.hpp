@@ -6,15 +6,21 @@
 # include <iomanip>
 # include <fstream>
 # include <iostream>
-# include "ScavTrap.hpp"
+# include "ClapTrap.hpp"
 
-class ScavTrap : public ClapTrap {
+class ScavTrap : public ClapTrap
+{
 public:
     ScavTrap(std::string Name);
+    ScavTrap(const ScavTrap& scavTrap); 
     virtual ~ScavTrap(); 
-    void attack(const std::string& target) override; 
+    ScavTrap& operator=(const ScavTrap& scavTrap);
+
+    void attack(const std::string& target);
     void guardGate(); 
 
+private:
+    ScavTrap();
 };
 
 #endif

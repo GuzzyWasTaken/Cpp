@@ -1,11 +1,13 @@
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap(std::string Name) : ClapTrap(Name), _AD(30), _HP(100)
+FragTrap::FragTrap(std::string Name) : ClapTrap(Name)
 {
+    this->_AD = 30;
+    this->_HP = 100;
     std::cout << "FragTrap Constructor called" << std::endl;
 }
 
-FragTrap::FragTrap(const FragTrap& fragTrap) : ClapTrap(fragTrap) 
+FragTrap::FragTrap(const FragTrap& fragTrap) : ClapTrap(fragTrap)
 {
     std::cout << "FragTrap Copy constructor called" << std::endl;
 }
@@ -37,7 +39,7 @@ void FragTrap::attack(const std::string& target)
     std::cout << _Name << " attacks " << target << " causing " << (_AD) << " points of damage" << std::endl;
 }
 
-void FragTrap::highFivesGuys()
+void FragTrap::highFiveGuys()
 {
     std::cout << _Name << " requests a positive high five!" << std::endl;
 }

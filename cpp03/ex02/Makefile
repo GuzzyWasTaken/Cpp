@@ -1,10 +1,10 @@
 CPP = g++
 CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 
-HDR = ClapTrap.hpp ScavTrap.hpp
-SRCS = ClapTrap.cpp main.cpp ScavTrap.cpp
+HDR = ClapTrap.hpp ScavTrap.hpp FragTrap.hpp
+SRCS = ClapTrap.cpp main.cpp ScavTrap.cpp FragTrap.cpp
 OBJS = $(SRCS:.cpp=.o) 
-TARGET = ClapTrap
+TARGET = FragTrap
 
 all: $(TARGET)
 
@@ -15,11 +15,12 @@ $(TARGET): $(OBJS) $(HDR)
 	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS)
 
-re:
-	clean
-	all
+fclean: clean
+	rm -f $(TARGET)
+
+re: fclean all
 
 zoro:
 	@printf "\n"
