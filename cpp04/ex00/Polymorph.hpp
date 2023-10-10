@@ -17,24 +17,10 @@ class Animal
         Animal(const Animal &Anim);
         Animal &operator=(const Animal &other);
         virtual ~Animal();
-        virtual void makeSound() const = 0;
+        virtual void makeSound();
 };
 
-class Dog : public Animal
-{
-    public:
-        Dog();
-        ~Dog();
-        void makeSound() const ;
-};
 
-class Cat : public Animal
-{
-    public:
-        Cat();
-        ~Cat();
-        void makeSound() const ;
-};
 
 
 

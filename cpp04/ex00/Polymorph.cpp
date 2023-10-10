@@ -18,7 +18,7 @@ Animal &Animal::operator=(const Animal &other)
     return *this;
 }
 
-Animal::Animal(const Animal &Clap)
+Animal::Animal(const Animal &other)
 {
     std::cout << "copy constructor made" << std::endl;
     *this = Clap;
