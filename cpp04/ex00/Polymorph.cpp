@@ -21,5 +21,10 @@ Animal &Animal::operator=(const Animal &other)
 Animal::Animal(const Animal &other)
 {
     std::cout << "copy constructor made" << std::endl;
-    *this = Clap;
+    *this = other;
+}
+
+std::string Animal::getType()
+{
+    return(this->_Type);
 }
