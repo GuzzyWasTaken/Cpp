@@ -1,6 +1,7 @@
-#include "Polymorph.hpp"
+#include "Cat.hpp"
 
-Cat::Cat() 
+
+Cat::Cat()
 {
     std::cout << "Cat constructor called" << std::endl;
     _Type = "Cat";
