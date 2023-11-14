@@ -1,4 +1,4 @@
-#include "Polymorph.hpp"
+#include "Animal.hpp"
 
 
 Animal::Animal()
@@ -18,14 +18,18 @@ Animal &Animal::operator=(const Animal &other)
     return *this;
 }
 
-Animal::Animal(const Animal &Clap)
+Animal::Animal(const Animal &other)
 {
     std::cout << "copy constructor made" << std::endl;
-    *this = Clap;
+    *this = other;
 }
 
+std::string Animal::getType() const
+{
+    return(this->_Type);
+}
 
-
-
-
-
+void Animal::makeSound() const
+{
+    std::cout << "sound" << std::endl;
+}

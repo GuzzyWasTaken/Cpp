@@ -1,4 +1,4 @@
-#include "Polymorph.hpp"
+#include "Dog.hpp"
 
 void Dog::makeSound() const
 {
@@ -8,12 +8,10 @@ void Dog::makeSound() const
 Dog::Dog()
 {
     std::cout << "Dog constructor called" << std::endl;
-    _brain = new Brain;
     _Type = "Dog";
 }
 
 Dog::~Dog()
 {
     std::cout << "Dog deconstructor called" << std::endl;
-    delete _brain;
 }

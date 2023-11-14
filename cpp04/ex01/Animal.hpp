@@ -1,5 +1,5 @@
-#ifndef POLYMORPH_HPP
-# define POLYMORPH_HPP
+#ifndef ANIMAL_HPP
+# define ANIMAL_HPP
 
 # include <cstdlib>
 # include <string>
@@ -17,8 +17,8 @@ class Animal
         Animal(const Animal &Anim);
         Animal &operator=(const Animal &other);
         virtual ~Animal();
-        virtual void makeSound();
-        virtual std::string getType();
+        virtual void makeSound() const;
+        virtual std::string getType() const;
 };
 
 

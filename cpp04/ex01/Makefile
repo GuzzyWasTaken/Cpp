@@ -1,10 +1,11 @@
 CPP = g++
-CPPFLAGS = -Wall -Werror -Wextra -std=c++98
+# CPPFLAGS = -Wall -Werror -Wextra -std=c++98
+CPPFLAGS = -Wall -Wextra -std=c++98
 
-HDR = Polymorph.hpp 
-SRCS = Polymorph.cpp main.cpp Dog.cpp Cat.cpp Brain.cpp
+HDR = Animal.hpp Cat.hpp Dog.hpp WrongAnimal.hpp WrongCat.hpp Brain.hpp
+SRCS = Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp main.cpp Brain.cpp
 OBJS = $(SRCS:.cpp=.o) 
-TARGET = Polymorph
+TARGET = Brain
 
 all: $(TARGET)
 
@@ -15,11 +16,12 @@ $(TARGET): $(OBJS) $(HDR)
 	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS)
 
-re:
-	clean
-	all
+fclean: clean
+	rm -f $(TARGET)
+
+re: fclean all
 
 zoro:
 	@printf "\n"

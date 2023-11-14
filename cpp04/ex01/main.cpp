@@ -1,23 +1,39 @@
-#include "Polymorph.hpp"
+#include "Animal.hpp"
+#include "Dog.hpp"
+#include "Cat.hpp"
+
+#include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
 
 int main()
 {
-    const int numAnimals = 10;
-    Animal* animals[numAnimals];
+    Animal *AnimalArray[10];
 
-    for (int i = 0; i < numAnimals / 2; ++i)
-    {
-        animals[i] = new Dog();
-    }
+    // 5 Dogs in array
+    for (int i = 0; i < 5; i++)
+        AnimalArray[i] = new Dog();
 
-    for (int i = numAnimals / 2; i < numAnimals; ++i)
+    // 5 Cats in array
+    for (int i = 5; i < 10; i++)
+        AnimalArray[i] = new Cat();
+    
+    std::cout << "---------------------------------------------" << std::endl;
+    std::cout << "Dog and cat noises" << std::endl;
+    std::cout << "---------------------------------------------" << std::endl;
+
+    AnimalArray[1]->makeSound();
+    AnimalArray[9]->makeSound();
+
+    std::cout << "---------------------------------------------" << std::endl;
+
+    // delete full array
+    for (int i = 0; i < 10; i++)
     {
-        animals[i] = new Cat();
+       delete AnimalArray[i];
     }
-    // Delete all animals
-    for (int i = 0; i < numAnimals; ++i)
-    {
-        delete animals[i];
-    }
-    return 0;
+    std::cout << "---------------------------------------------" << std::endl;
+    std::cout << "---------------------------------------------" << std::endl;
+
+    
+    return (0);
 }

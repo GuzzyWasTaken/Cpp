@@ -1,5 +1,6 @@
 CPP = g++
-CPPFLAGS = -Wall -Werror -Wextra -std=c++98
+# CPPFLAGS = -Wall -Werror -Wextra -std=c++98
+CPPFLAGS = -Wall -Wextra -std=c++98
 
 HDR = Animal.hpp Cat.hpp Dog.hpp WrongAnimal.hpp WrongCat.hpp  
 SRCS = Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp main.cpp
