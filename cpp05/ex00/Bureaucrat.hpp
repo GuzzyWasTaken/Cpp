@@ -17,6 +17,11 @@ class Bureaucrat
         std::string GradeTooLowException();
 
         Bureaucrat &operator=(const Bureaucrat &other);
+        Bureaucrat &operator<<(std::ostream& os,const Bureaucrat &other);
+            friend std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat) {
+        os << bureaucrat.name << ", bureaucrat grade " << bureaucrat.grade;
+        return os;
+    }
         Bureaucrat(std::string name, int grade);
         Bureaucrat();
         void IncrementGrade();
@@ -27,10 +32,11 @@ class Bureaucrat
         
         ~Bureaucrat();
 
-        class SomeException: public std::exception {
-            public:
-            const char* what() { return "oof!"; }
-        }
+        // class SomeException: public std::exception 
+        // {
+        //     public:
+        //     const char* what() { return "oof!"; }
+        // };
 };
 
 #endif

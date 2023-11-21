@@ -43,9 +43,9 @@ Bureaucrat::Bureaucrat(const std::string name, int grade) : _Name (name)
     try
     {
         if (grade < 1)
-            throw GradeTooHighException();
-        else if (grade > 150)
             throw GradeTooLowException();
+        else if (grade > 150)
+            throw GradeTooHighException();
         else
             _Grade = grade;
     }
@@ -73,3 +73,8 @@ Bureaucrat::Bureaucrat()
      std::cout << "Bur constructor called" << std::endl;
 }
 
+Bureaucrat::ostream::operator<<(std::ostream& os, const Bureaucrat &other)
+{
+    os << bureaucrat.name << ", bureaucrat grade " << bureaucrat.grade;
+    return os;
+}
