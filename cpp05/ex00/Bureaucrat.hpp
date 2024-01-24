@@ -9,34 +9,40 @@
 
 class Bureaucrat
 {
-    private:
-        const std::string _Name;
-        int _Grade;
-    public:
-        std::string GradeTooHighException();
-        std::string GradeTooLowException();
+private:
+    const std::string   _Name;
+    int                 _Grade;
 
-        Bureaucrat &operator=(const Bureaucrat &other);
-        Bureaucrat &operator<<(std::ostream& os,const Bureaucrat &other);
-            friend std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat) {
-        os << bureaucrat.name << ", bureaucrat grade " << bureaucrat.grade;
-        return os;
-    }
-        Bureaucrat(std::string name, int grade);
-        Bureaucrat();
-        void IncrementGrade();
-        void DecrementGrade();
 
-        std::string getName();
-        int          getGrade();
-        
-        ~Bureaucrat();
+public:
+    Bureaucrat(const std::string& name, int grade) ;
+    Bureaucrat(const Bureaucrat& src);
+    ~Bureaucrat();
+    
+    Bureaucrat &operator=(const Bureaucrat &other);
 
-        // class SomeException: public std::exception 
-        // {
-        //     public:
-        //     const char* what() { return "oof!"; }
-        // };
+
+
+    std::string getName() const;
+    int         getGrade() const;
+
+    void        incrementGrade();
+    void        decrementGrade();
+
+
+    class GradeTooHighException : public std::exception 
+    {
+        public:
+            virtual const char* what() const throw() { return "Grade too high"; }
+    };
+    class GradeTooLowException : public std::exception 
+    {
+        public:
+            virtual const char* what() const throw() { return "Grade too low"; }
+    };
+
 };
 
-#endif
+   std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat);
+
+#endif // BUREAUCRAT_HPP

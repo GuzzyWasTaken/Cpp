@@ -13,8 +13,8 @@ int main() {
         std::cout << "Bureaucrat 3 - Name: " << bureaucrat3.getName() << ", Grade: " << bureaucrat3.getGrade() << std::endl;
 
         // Increment and decrement grades
-        bureaucrat1.IncrementGrade();
-        bureaucrat2.DecrementGrade();
+        bureaucrat1.incrementGrade();
+        bureaucrat2.decrementGrade();
 
         // Display updated grades
         std::cout << "\nUpdated Grades:" << std::endl;

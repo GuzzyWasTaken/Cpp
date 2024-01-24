@@ -2,58 +2,47 @@
 
 
  //throw exception class
-int Bureaucrat::getGrade()
+int Bureaucrat::getGrade() const
 {
     return (_Grade);
 }
 
-std::string Bureaucrat::getName()
+std::string Bureaucrat::getName() const
 {
     return(_Name);
 }
 
-std::string Bureaucrat::GradeTooHighException()
-{
-    return "grade too high!";
-}
-
-std::string Bureaucrat::GradeTooLowException()
-{
-    return "grade too low!";
-}
-void Bureaucrat::IncrementGrade()
-{
-    if (_Grade == 150)
-        throw GradeTooHighException();
-
-    _Grade++;
-}
-
-void Bureaucrat::DecrementGrade()
-{
-    if (_Grade == 1)
-        throw GradeTooLowException();
-
+void    Bureaucrat::incrementGrade()
+ {
+    if ( _Grade - 1 < 1 )
+        throw Bureaucrat::GradeTooHighException();
     _Grade--;
 }
 
-Bureaucrat::Bureaucrat(const std::string name, int grade) : _Name (name)
+void    Bureaucrat::decrementGrade() 
 {
-    std::cout << "Bur constructor called" << std::endl;
-    try
-    {
-        if (grade < 1)
-            throw GradeTooLowException();
-        else if (grade > 150)
-            throw GradeTooHighException();
-        else
-            _Grade = grade;
-    }
-    catch (const std::exception &e)
-    {
-        std::cerr << e.what() << '\n';
-    }
+    if ( _Grade + 1 > 150 )
+        throw Bureaucrat::GradeTooLowException();
+    _Grade++;
 }
+
+// Bureaucrat::Bureaucrat(const std::string name, int grade) : _Name (name)
+// {
+//     std::cout << "Bur constructor called" << std::endl;
+//     try
+//     {
+//         if (grade < 1)
+//             throw GradeTooLowException();
+//         else if (grade > 150)
+//             throw GradeTooHighException();
+//         else
+//             _Grade = grade;
+//     }
+//     catch (const std::exception &e)
+//     {
+//         std::cerr << e.what() << '\n';
+//     }
+// }
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 {
@@ -68,13 +57,22 @@ Bureaucrat::~Bureaucrat()
 
 }
 
-Bureaucrat::Bureaucrat()
+
+Bureaucrat::Bureaucrat(const std::string& name, int grade) : _Name(name), _Grade(grade) 
+{
+    if (grade < 1)
+        throw Bureaucrat::GradeTooHighException();
+    if (grade > 150)
+        throw Bureaucrat::GradeTooLowException();
+}
+
+Bureaucrat::Bureaucrat( const Bureaucrat& src ) : _Name(src._Name), _Grade(src._Grade)
 {
      std::cout << "Bur constructor called" << std::endl;
 }
 
-Bureaucrat::ostream::operator<<(std::ostream& os, const Bureaucrat &other)
+std::ostream& operator<<(std::ostream& os, const Bureaucrat &other)
 {
-    os << bureaucrat.name << ", bureaucrat grade " << bureaucrat.grade;
+    os << other.getName() << ", bureaucrat grade " << other.getGrade();
     return os;
 }
