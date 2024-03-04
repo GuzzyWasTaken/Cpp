@@ -2,8 +2,8 @@ CPP = g++
 # CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 CPPFLAGS = -Wall -Wextra -std=c++98
 
-HDR = Bureaucrat.hpp 
-SRCS = Bureaucrat.cpp main.cpp
+HDR = Bureaucrat.hpp Form.hpp
+SRCS = Bureaucrat.cpp main.cpp Form.cpp
 OBJS = $(SRCS:.cpp=.o) 
 TARGET = Bureaucrat
 
