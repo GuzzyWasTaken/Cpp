@@ -1,6 +1,5 @@
 #include "Bureaucrat.hpp"
 
-
  //throw exception class
 int Bureaucrat::getGrade() const
 {
@@ -33,12 +32,22 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
     return *this;
 }
 
-void Bureaucrat::signForm(Form& form);
+void Bureaucrat::signForm(Form& form)
+{
+    try 
+    {
+        //form.beSigned(*this);
+        std::cout << *this << " signed " << form.getName() << std::endl;
+    } 
+    catch (Form::GradeTooLowException &e) 
+    {
+        std::cout << _Name << " coulnd't sign " << form.getName() << " because " << e.what() << std::endl;
+    }
+}
 
 Bureaucrat::~Bureaucrat()
 {
     std::cout << "Bur deconstructor called" << std::endl;
-
 }
 
 Bureaucrat::Bureaucrat(const std::string& name, int grade) : _Name(name), _Grade(grade) 
