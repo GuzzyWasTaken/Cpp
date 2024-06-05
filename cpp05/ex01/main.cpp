@@ -1,10 +1,11 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 int main() {
     try {
         // Create Bureaucrat objects with valid and invalid grades
         Bureaucrat bureaucrat1("Alice", 75); // Valid grade
-        Bureaucrat bureaucrat2("Bob", 0);   // Invalid grade (too low)
+        Bureaucrat bureaucrat2("Bob", 100);   // Invalid grade (too low)
         Bureaucrat bureaucrat3("Charlie", 160); // Invalid grade (too high)
 
         // Display bureaucrat information

@@ -5,6 +5,8 @@
 #include <string>
 #include "Bureaucrat.hpp"
 
+class Bureaucrat;
+
 class Form 
 {
 private:
@@ -16,6 +18,7 @@ private:
 public:
     Form(const std::string& n, int signGrade, int executeGrade);
     void signForm(int bureaucratGrade);
+    void beSigned(const Bureaucrat& bureaucrat);
     Form &operator=(const Form &copy);
     ~Form();
     void executeForm(int bureaucratGrade) const;
