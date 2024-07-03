@@ -1,38 +1,52 @@
 #include "ShrubberyCreationForm.hpp"
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include <fstream>
 
-ShrubberyCreationForm::ShrubberyCreationForm(void): Form::Form("ShrubberyCreationForm", 145, 137), _target("null") {}
-
-ShrubberyCreationForm::ShrubberyCreationForm(std::string const &target): Form::Form("ShrubberyCreationForm", 145, 137), _target(target) {}
-
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &copy): Form::Form(copy), _target(copy._target) {}
-
-ShrubberyCreationForm::~ShrubberyCreationForm(void) {}
-
-ShrubberyCreationForm const	&ShrubberyCreationForm::operator=(const ShrubberyCreationForm &copy)
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) : AForm("ShrubberyCreationForm", 145, 137), target(target)
 {
-	Form::operator=(copy);
-	this->_target = copy._target;
-	return (*this);
+    //std::cout << "ShrubberyCreationForm constructor called" << std::endl;
 }
 
-void	ShrubberyCreationForm::beExecuted(const Bureaucrat &bureaucrat) const
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &old_obj) : AForm(old_obj), target(old_obj.target)
 {
-	std::ofstream	outfile;
-	
-	outfile.open((this->_target + "_shrubbery").c_str());
-	if (outfile.fail())
+    //std::cout << "Copy ShrubberyCreationForm constructor called" << std::endl;
+    *this = old_obj;
+}
+
+ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm &old_obj)
+{
+    //std::cout << "Copy ShrubberyCreationForm assignment operator called" << std::endl;
+    (void) old_obj;
+    return (*this);
+}
+
+ShrubberyCreationForm::~ShrubberyCreationForm()
+{
+    //std::cout << "ShrubberyCreationForm Destructor called" << std::endl;
+}
+
+void ShrubberyCreationForm::execute(Bureaucrat const &executor)
+{
+    std::ofstream	outfile;
+	const std::string	outfileName = this->target + "_shrubbery";
+	outfile.open(outfileName.c_str());
+	if (!outfile)
 	{
-		std::cout << "Could not open output file" << std::endl;
-		return ;
-	}
-	outfile << TREE;
-	outfile.close();
-	std::cout << bureaucrat.getName() << " successfully created a shrubbery" << std::endl;
-}
-
-std::ostream	&operator<<(std::ostream &str, ShrubberyCreationForm const &form)
-{
-	return (str << form.getName() << " form, signed: " << form.getIsSigned() << ", sign grade: " << form.getSignGrade() << ", exec grade: " << form.getExecGrade());
+        std::cout << "Cannot create outfile" << std::endl;
+        return;
+    }
+    std::string			shrubbery =	"               ,@@@@@@@,\n"
+							   						"       ,,,.   ,@@@@@@/@@,  .oo8888o.\n"
+							   						"    ,&%%&%&&%,@@@@@/@@@@@@,8888\\88/8o\n"
+							   						"   ,%&\\%&&%&&%,@@@\\@@@/@@@88\\88888/88'\n"
+							   						"   %&&%&%&/%&&%@@\\@@/ /@@@88888\\88888'\n"
+							   						"   %&&%/ %&%%&&@@\\ V /@@' `88\\8 `/88'\n"
+							   						"   `&%\\ ` /%&'    |.|        \\ '|8'\n"
+							   						"       |o|        | |         | |\n"
+							   						"       |.|        | |         | |\n"
+							   						"    \\\\/ ._\\//_/__/  ,\\_//__\\\\/.  \\_//__/_";
+    if (executor.getGrade() <= this->getGradeExecute())
+        outfile << shrubbery;
+    else
+        throw AForm::GradeTooLowException();
 }

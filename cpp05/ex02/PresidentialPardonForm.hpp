@@ -1,24 +1,21 @@
-#include "Form.hpp"
+#ifndef PRESIDENT_HPP
+# define PRESIDENT_HPP
 
-class Bureaucrat;
+#include "AForm.hpp"
 
-class PresidentialPardonForm: public Form
+class PresidentialPardonForm : public AForm
 {
+    public:
+		PresidentialPardonForm(const std::string &target);
+		PresidentialPardonForm(const PresidentialPardonForm &old_obj);
+		PresidentialPardonForm &operator=(const PresidentialPardonForm &old_obj);
+		~PresidentialPardonForm();
+
+		//Public Member Functions
+		void execute(Bureaucrat const &executor);
+
 	private:
-		std::string	_target;
-	public:
-		/* Constructors & Destructors */
-		PresidentialPardonForm(void);
-		PresidentialPardonForm(std::string const &target);
-		PresidentialPardonForm(PresidentialPardonForm const &copy);
-		~PresidentialPardonForm(void);
-
-		/* Basic Operators */
-		PresidentialPardonForm const	&operator=(PresidentialPardonForm const &copy);
-
-		/* Main Member Functions */
-		void	beExecuted(Bureaucrat const &bureaucrat) const;
+    	const std::string &target; 
 };
 
-std::ostream	&operator<<(std::ostream &str, PresidentialPardonForm const &form);
-
+#endif

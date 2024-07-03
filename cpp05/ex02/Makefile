@@ -2,8 +2,8 @@ CPP = g++
 # CPPFLAGS = -Wall -Werror -Wextra -std=c++98
 CPPFLAGS = -Wall -Wextra -std=c++98
 
-HDR = Bureaucrat.hpp Form.hpp  PresidentialCreationForm.hpp PresidentialPardonForm.hpp PresidentialRequestForm.hpp 
-SRCS = Bureaucrat.cpp main.cpp Form.cpp PresidentialCreationForm.cpp   PresidentialPardonForm.cpp    PresidentialRequestForm.cpp  
+HDR = Bureaucrat.hpp AForm.hpp  ShrubberyCreationForm.hpp PresidentialPardonForm.hpp RobotomyRequestForm.hpp 
+SRCS = Bureaucrat.cpp main.cpp AForm.cpp ShrubberyCreationForm.cpp   PresidentialPardonForm.cpp    RobotomyRequestForm.cpp  
 OBJS = $(SRCS:.cpp=.o) 
 TARGET = Shrubbery
 

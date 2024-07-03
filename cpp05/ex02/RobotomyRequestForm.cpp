@@ -1,38 +1,43 @@
-
 #include "RobotomyRequestForm.hpp"
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include <cstdlib>
+#include <ctime>
 
-RobotomyRequestForm::RobotomyRequestForm(void): Form::Form("RobotomyRequestForm", 72, 45), _target("null") {}
-
-RobotomyRequestForm::RobotomyRequestForm(std::string const &target): Form::Form("RobotomyRequestForm", 72, 45), _target(target) {}
-
-RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &copy): Form::Form(copy), _target(copy._target) {}
-
-RobotomyRequestForm::~RobotomyRequestForm(void) {}
-
-RobotomyRequestForm const	&RobotomyRequestForm::operator=(const RobotomyRequestForm &copy)
+RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : AForm("RobotomyRequestForm", 72, 45), target(target)
 {
-	Form::operator=(copy);
-	this->_target = copy._target;
-	return (*this);
+    //std::cout << "RobotomyRequestForm constructor called" << std::endl;
 }
 
-void	RobotomyRequestForm::beExecuted(const Bureaucrat &bureaucrat) const
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &old_obj) : AForm(old_obj), target(old_obj.target)
 {
-	int	success;
-
-	/* Set Seed */
-	srand((unsigned) time(NULL));
-	success = rand() % 2;
-	(void)bureaucrat;
-	if (success)
-		std::cout << this->_target << " has been robotomized successfully" << std::endl;
-	else
-		std::cout << this->_target << "'s robotomization failed" << std::endl;
+    //std::cout << "Copy RobotomyRequestForm constructor called" << std::endl;
+    *this = old_obj;
 }
 
-std::ostream	&operator<<(std::ostream &str, RobotomyRequestForm const &form)
+RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm &old_obj)
 {
-	return (str << form.getName() << " form, signed: " << form.getIsSigned() << ", sign grade: " << form.getSignGrade() << ", exec grade: " << form.getExecGrade());
+    //std::cout << "Copy RobotomyRequestForm assignment operator called" << std::endl;
+    (void) old_obj;
+    return (*this);
+}
+
+RobotomyRequestForm::~RobotomyRequestForm()
+{
+    //std::cout << "RobotomyRequestForm Destructor called" << std::endl;
+}
+
+void RobotomyRequestForm::execute(Bureaucrat const &executor)
+{
+    if (executor.getGrade() <= this->getGradeExecute())
+    {
+        std::srand((unsigned) std::time(NULL));
+        if(std::rand() % 2)
+            std::cout << this->target << " has been robotomize successfully."<< std::endl;
+        else
+            std::cout << "Robotomizing of " << this->target << " has failed"<< std::endl;
+    }
+    else
+    {
+        throw AForm::GradeTooLowException();
+    }
 }

@@ -1,25 +1,21 @@
+#ifndef ROBOTOMY_HPP
+# define ROBOTOMY_HPP
 
-#include <cstdlib>
-#include "Form.hpp"
+#include "AForm.hpp"
 
-class Bureaucrat;
-
-class RobotomyRequestForm: public Form
+class RobotomyRequestForm : public AForm
 {
+    public:
+		RobotomyRequestForm(const std::string &target);
+		RobotomyRequestForm(const RobotomyRequestForm &old_obj);
+		RobotomyRequestForm &operator=(const RobotomyRequestForm &old_obj);
+		~RobotomyRequestForm();
+
+		//Public Member Functions
+		void execute(Bureaucrat const &executor);
+
 	private:
-		std::string	_target;
-	public:
-		/* Constructors & Destructors */
-		RobotomyRequestForm(void);
-		RobotomyRequestForm(std::string const &target);
-		RobotomyRequestForm(RobotomyRequestForm const &copy);
-		~RobotomyRequestForm(void);
-
-		/* Basic Operators */
-		RobotomyRequestForm const	&operator=(RobotomyRequestForm const &copy);
-
-		/* Main Member Functions */
-		void	beExecuted(Bureaucrat const &bureaucrat) const;
+    	const std::string &target; 
 };
 
-std::ostream	&operator<<(std::ostream &str, RobotomyRequestForm const &form);
+#endif
