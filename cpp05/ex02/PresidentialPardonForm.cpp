@@ -6,17 +6,19 @@ PresidentialPardonForm::PresidentialPardonForm(const std::string &target) : AFor
     //std::cout << "PresidentialPardonForm constructor called" << std::endl;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &old_obj) : AForm(old_obj), target(old_obj.target)
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &other) : AForm(other), target(other.target)
 {
     //std::cout << "Copy PresidentialPardonForm constructor called" << std::endl;
-    *this = old_obj;
+    *this = other;
 }
 
-PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm &old_obj)
+PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm &other)
 {
-    //std::cout << "Copy PresidentialPardonForm assignment operator called" << std::endl;
-    (void) old_obj;
-    return (*this);
+    // std::cout << "Copy PresidentialPardonForm assignment operator called" << std::endl;
+    if (this == &other)
+        return *this;
+	
+    return *this;
 }
 
 PresidentialPardonForm::~PresidentialPardonForm()

@@ -7,17 +7,19 @@ ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) : AForm(
     //std::cout << "ShrubberyCreationForm constructor called" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &old_obj) : AForm(old_obj), target(old_obj.target)
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other) : AForm(other), target(other.target)
 {
     //std::cout << "Copy ShrubberyCreationForm constructor called" << std::endl;
-    *this = old_obj;
+    *this = other;
 }
 
-ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm &old_obj)
+ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other)
 {
     //std::cout << "Copy ShrubberyCreationForm assignment operator called" << std::endl;
-    (void) old_obj;
-    return (*this);
+	if (this == &other)
+		return *this;
+        
+	return *this;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
@@ -35,18 +37,21 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor)
         std::cout << "Cannot create outfile" << std::endl;
         return;
     }
-    std::string			shrubbery =	"               ,@@@@@@@,\n"
-							   						"       ,,,.   ,@@@@@@/@@,  .oo8888o.\n"
-							   						"    ,&%%&%&&%,@@@@@/@@@@@@,8888\\88/8o\n"
-							   						"   ,%&\\%&&%&&%,@@@\\@@@/@@@88\\88888/88'\n"
-							   						"   %&&%&%&/%&&%@@\\@@/ /@@@88888\\88888'\n"
-							   						"   %&&%/ %&%%&&@@\\ V /@@' `88\\8 `/88'\n"
-							   						"   `&%\\ ` /%&'    |.|        \\ '|8'\n"
-							   						"       |o|        | |         | |\n"
-							   						"       |.|        | |         | |\n"
-							   						"    \\\\/ ._\\//_/__/  ,\\_//__\\\\/.  \\_//__/_";
+
+     std::string			shrubbery =	"               ,@@@@@@@,\n"
+                                        "       ,,,.   ,@@@@@@/@@,  .oo8888o.\n"
+                                        "    ,&%%&%&&%,@@@@@/@@@@@@,8888\\88/8o\n"
+                                        "   ,%&\\%&&%&&%,@@@\\@@@/@@@88\\88888/88'\n"
+                                        "   %&&%&%&/%&&%@@\\@@/ /@@@88888\\88888'\n"
+                                        "   %&&%/ %&%%&&@@\\ V /@@' `88\\8 `/88'\n"
+                                        "   `&%\\ ` /%&'    |.|        \\ '|8'\n"
+                                        "       |o|        | |         | |\n"
+                                        "       |.|        | |         | |\n"
+                                        "    \\\\/ ._\\//_/__/  ,\\_//__\\\\/.  \\_//__/_";
+
     if (executor.getGrade() <= this->getGradeExecute())
         outfile << shrubbery;
     else
         throw AForm::GradeTooLowException();
+    outfile.close();
 }

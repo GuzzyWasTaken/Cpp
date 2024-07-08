@@ -8,17 +8,19 @@ RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : AForm("Rob
     //std::cout << "RobotomyRequestForm constructor called" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &old_obj) : AForm(old_obj), target(old_obj.target)
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other) : AForm(other), target(other.target)
 {
     //std::cout << "Copy RobotomyRequestForm constructor called" << std::endl;
-    *this = old_obj;
+    *this = other;
 }
 
-RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm &old_obj)
+RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm &other)
 {
     //std::cout << "Copy RobotomyRequestForm assignment operator called" << std::endl;
-    (void) old_obj;
-    return (*this);
+	if (this == &other)
+		return *this;
+        
+	return *this;
 }
 
 RobotomyRequestForm::~RobotomyRequestForm()

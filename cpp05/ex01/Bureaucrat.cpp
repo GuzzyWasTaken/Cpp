@@ -13,14 +13,14 @@ std::string Bureaucrat::getName() const
 
 void    Bureaucrat::incrementGrade()
  {
-    if ( _Grade - 1 < 1 )
+    if ( _Grade - 1 < 1)
         throw Bureaucrat::GradeTooHighException();
     _Grade--;
 }
 
 void    Bureaucrat::decrementGrade() 
 {
-    if ( _Grade + 1 > 150 )
+    if ( _Grade + 1 > 150)
         throw Bureaucrat::GradeTooLowException();
     _Grade++;
 }
@@ -36,7 +36,7 @@ void Bureaucrat::signForm(Form& form)
 {
     try 
     {
-        //form.beSigned(*this);
+        form.beSigned(*this);
         std::cout << *this << " signed " << form.getName() << std::endl;
     } 
     catch (Form::GradeTooLowException &e) 

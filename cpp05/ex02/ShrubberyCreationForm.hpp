@@ -5,17 +5,24 @@
 
 class ShrubberyCreationForm : public AForm
 {
+	private:
+    	const std::string &target; 
+		void execute(Bureaucrat const &executor);
+
     public:
+		ShrubberyCreationForm();
 		ShrubberyCreationForm(const std::string &target);
-		ShrubberyCreationForm(const ShrubberyCreationForm &old_obj);
-		ShrubberyCreationForm &operator=(const ShrubberyCreationForm &old_obj);
+		ShrubberyCreationForm(const ShrubberyCreationForm &other);
+		ShrubberyCreationForm &operator=(const ShrubberyCreationForm &other);
 		~ShrubberyCreationForm();
 
 		//Public Member Functions
-		void execute(Bureaucrat const &executor);
 
-	private:
-    	const std::string &target; 
+		class OpenFileExeption : public std::exception
+		{
+			public:
+				virtual const char *what() const throw();
+		};
 };
 
 #endif

@@ -34,21 +34,6 @@ Form::~Form()
     std::cout << "Form Destructor called" << std::endl;
 }
 
-void Form::signForm(int bureaucratGrade) 
-{
-    if (bureaucratGrade <= gradeToSign) 
-    {
-        isSigned = true;
-        std::cout << "Form has been signed by bureaucrat." << std::endl;
-    }
-    else 
-    {
-        throw Form::GradeTooLowException();
-    }
-}
-
-
-
 void    Form::beSigned(const Bureaucrat& bureaucrat) 
 {
     if ( bureaucrat.getGrade() > gradeToSign )

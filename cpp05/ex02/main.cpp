@@ -1,65 +1,43 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
-
 #include "ShrubberyCreationForm.hpp"
-#include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
-#include <iostream>
-
-int main (void)
+int main(void)
 {
-    try 
-    {
-        Bureaucrat henk("Henk", 30);
-        PresidentialPardonForm pres("Prinses Amalia");
-        std::cout << "---------------------------------------------------" << std::endl;
-        henk.signForm(pres);
-        henk.executeForm(pres);
-    }
-    catch (AForm::GradeTooLowException& e) 
-    {
-        std::cerr << e.what() << std::endl;
-    }
-    catch (AForm::GradeTooHighException& e) 
-    {
-        std::cerr << e.what() << std::endl;
-    }
-    std::cout << "---------------------------------------------------" << std::endl;
-    try 
-    {
-        Bureaucrat sandra("Sandra", 14);
-        ShrubberyCreationForm shrub("Bomen_zijn_relaxed");
-        std::cout << "---------------------------------------------------" << std::endl;
-        sandra.signForm(shrub);
-        sandra.executeForm(shrub);
-    }
-    catch (AForm::GradeTooLowException& e) 
-    {
-        std::cerr << e.what() << std::endl;
-    }
-    catch (AForm::GradeTooHighException& e) 
-    {
-        std::cerr << e.what() << std::endl;
-    }
-    std::cout << "---------------------------------------------------" << std::endl;
-    try 
-    {
-        Bureaucrat term("Terminator", 120);
-        RobotomyRequestForm robot("Inspector Gadget");
-        std::cout << "---------------------------------------------------" << std::endl;
-        term.signForm(robot);
-        term.executeForm(robot);
-    }
-    catch (AForm::GradeTooLowException& e) 
-    {
-        std::cerr << e.what() << std::endl;
-    }
-    catch (AForm::GradeTooHighException& e) 
-    {
-        std::cerr << e.what() << std::endl;
-    }
-    std::cout << "---------------------------------------------------" << std::endl;
 
-    return EXIT_SUCCESS;
+	std::cout << "\033[33m" << std::endl << "Test ex02" << "\033[0m" << std::endl;
+
+	std::cout << "\033[33m" << std::endl << "Test ex02 ShrubberyCreationForm" << "\033[0m" << std::endl;
+	Bureaucrat Mr_Shrubby("Mr_Shrubby", 130);
+	ShrubberyCreationForm Shrubby_form("Hello");
+	std::cout << std::endl;
+	std::cout << Shrubby_form;
+	Mr_Shrubby.signForm(Shrubby_form);
+	std::cout << Shrubby_form;
+	Mr_Shrubby.executeForm(Shrubby_form);
+
+	std::cout << "\033[33m" << std::endl << "Test ex02 RobotomyRequestForm" << "\033[0m" << std::endl;
+	RobotomyRequestForm Robo_form("I am a robo form");
+	Bureaucrat Mr_Robo("Mr_Robo", 45);
+
+	Mr_Robo.executeForm(Robo_form);
+	Mr_Robo.signForm(Robo_form);
+	Mr_Robo.executeForm(Robo_form);
+	Mr_Robo.executeForm(Robo_form);
+	Mr_Robo.executeForm(Robo_form);
+
+	std::cout << "\033[33m" << std::endl << "Test ex02 PresidentialPardonForm" << "\033[0m" << std::endl;
+	PresidentialPardonForm President_form("I am a robo form");
+	Bureaucrat Mr_President("Mr_President", 5);
+
+	Mr_Robo.executeForm(President_form);
+	Mr_Robo.signForm(President_form);
+
+	Mr_President.executeForm(President_form);
+	Mr_President.signForm(President_form);
+	Mr_President.executeForm(President_form);
+	
+	return (0);
 }
