@@ -1,6 +1,6 @@
-CPP = g++
+CPP = g++ 
 # CPPFLAGS = -Wall -Werror -Wextra -std=c++98
-CPPFLAGS = -Wall -Wextra -std=c++98
+CPPFLAGS = -Wall -Wextra -std=c++11
 
 HDR = ScalarConverter.hpp 
 SRCS = ScalarConverter.cpp main.cpp

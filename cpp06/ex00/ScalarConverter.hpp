@@ -1,29 +1,58 @@
-#ifndef SCALERCONVERTER_HPP
-# define SCALERCONVERTER_HPP
+#ifndef CONVERTER_H
+#define CONVERTER_H
 
-# include <cstdlib>
-# include <string>
-# include <iomanip>
-# include <fstream>
-# include <iostream>
+#include <iostream>
+#include <string>
+#include <climits>
+#include <limits>
+#include <cmath>
+#include <iomanip>
 
-class ScalarConverter
-{
-private:
-
-
-public:
-    ScalarConverter(const std::string& name);
-    Bureaucrat(const &ScalarConverter src);
-    ~ScalarConverter();
-    
-    ScalarConverter &operator=(const ScalarConverter &other);
-
-
-
-
+enum e_type {
+	UNDETERMINED,
+	INVALID,
+	CHAR,
+	INT,
+	FLOAT,
+	DOUBLE,
+	NAN_,
+	INF
 };
 
-   
+class Converter {
+    
+private:
+  std::string arg_;
+	e_type type_;
+	void determine_type_(void);
+	void determine_int_double_float_(std::string str);
+	void print_conversions_char_(void) const;
+	void print_conversions_int_(void) const;
+	void print_conversions_double_(void) const;
+	void print_conversions_float_(void) const;
+	void print_conversions_nan_(void) const;
+	void print_conversions_inf_(void) const;
 
-#endif 
+ public:
+
+  Converter();
+  Converter(const Converter &copy);
+
+
+  ~Converter();
+
+
+  Converter &operator=(const Converter &other);
+
+
+  std::string get_arg(void) const;
+  void set_arg(const std::string &str);
+    e_type get_type(void) const;
+
+
+  void print_conversions(void);
+
+ 
+};
+
+#endif
