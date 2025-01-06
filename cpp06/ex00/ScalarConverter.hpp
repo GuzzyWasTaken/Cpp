@@ -1,58 +1,28 @@
-#ifndef CONVERTER_H
-#define CONVERTER_H
+#ifndef SCALARCONVERTER_HPP
+# define SCALARCONVERTER_HPP
 
-#include <iostream>
 #include <string>
-#include <climits>
-#include <limits>
-#include <cmath>
-#include <iomanip>
+#include <iostream>
 
-enum e_type {
-	UNDETERMINED,
-	INVALID,
-	CHAR,
-	INT,
-	FLOAT,
-	DOUBLE,
-	NAN_,
-	INF
-};
+class ScalarConverter {
+public:
+    static void convert(const std::string& literal);
 
-class Converter {
-    
 private:
-  std::string arg_;
-	e_type type_;
-	void determine_type_(void);
-	void determine_int_double_float_(std::string str);
-	void print_conversions_char_(void) const;
-	void print_conversions_int_(void) const;
-	void print_conversions_double_(void) const;
-	void print_conversions_float_(void) const;
-	void print_conversions_nan_(void) const;
-	void print_conversions_inf_(void) const;
+    ScalarConverter();                              // Prevent instantiation
+    ScalarConverter(const ScalarConverter& other); // Prevent copy-construction
+    ScalarConverter& operator=(const ScalarConverter& other); // Prevent copy-assignment
+    ~ScalarConverter();                             // Prevent destruction
 
- public:
+    static void convertToChar(double value);
+    static void convertToInt(double value);
+    static void convertToFloat(double value);
+    static void convertToDouble(double value);
 
-  Converter();
-  Converter(const Converter &copy);
-
-
-  ~Converter();
-
-
-  Converter &operator=(const Converter &other);
-
-
-  std::string get_arg(void) const;
-  void set_arg(const std::string &str);
-    e_type get_type(void) const;
-
-
-  void print_conversions(void);
-
- 
+    static bool isCharLiteral(const std::string& literal);
+    static bool isFloatLiteral(const std::string& literal);
+    static bool isDoubleLiteral(const std::string& literal);
+    static bool isIntLiteral(const std::string& literal);
 };
 
 #endif
