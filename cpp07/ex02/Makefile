@@ -1,22 +1,18 @@
-CPP = g++ 
-# CPPFLAGS = -Wall -Werror -Wextra -std=c++98
-CPPFLAGS = -Wall -Wextra -std=c++11
+CPP = g++
+CPPFLAGS = -Wall -Wextra -Werror -std=c++11
 
-HDR =  iter.hpp
-SRCS = main.cpp 
-OBJS = $(SRCS:.cpp=.o) 
-TARGET = Whatever
+HDR = Array.hpp
+TEMPLATES = Array.tpp
+SRCS = main.cpp
+TARGET = Array
 
 all: $(TARGET)
 
-$(TARGET): $(OBJS) $(HDR)
-	$(CPP) $(CPPFLAGS) $(OBJS) -o $(TARGET)
-
-%.o: %.cpp
-	$(CPP) $(CPPFLAGS) -c $< -o $@
+$(TARGET): $(SRCS) $(HDR) $(TEMPLATES)
+	$(CPP) $(CPPFLAGS) -o $(TARGET) $(SRCS)
 
 clean:
-	rm -f $(OBJS)
+	rm -f *.o
 
 fclean: clean
 	rm -f $(TARGET)
