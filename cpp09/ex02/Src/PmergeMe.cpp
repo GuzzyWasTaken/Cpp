@@ -90,8 +90,7 @@ void PmergeMe::insertSortVector(std::vector<int>& vec, int start, int end) {
 
     // We'll build a sorted temporary vector.
     std::vector<int> sorted;
-    // Start with the first element.
-    sorted.push_back(vec[start]);
+    sorted.push_back(vec[start]); // Start with the first element.
 
     // Keep track of which positions (relative to the subarray) have been inserted.
     std::vector<bool> inserted(n, false);
@@ -105,10 +104,21 @@ void PmergeMe::insertSortVector(std::vector<int>& vec, int start, int end) {
         int pos = jacobIndices[idx];
         if (pos >= n)
             break;
+
         int value = vec[start + pos];
-        // Insert using binary search.
-        auto it = std::lower_bound(sorted.begin(), sorted.end(), value);
-        sorted.insert(it, value);
+
+        // Perform manual binary search to find the insertion position.
+        size_t insertPos = 0;
+        for (size_t j = 0; j < sorted.size(); j++) {
+            if (sorted[j] >= value) {
+                insertPos = j;
+                break;
+            }
+            insertPos = j + 1;
+        }
+
+        // Insert the value at the correct position.
+        sorted.insert(sorted.begin() + insertPos, value);
         inserted[pos] = true;
     }
 
@@ -116,19 +126,28 @@ void PmergeMe::insertSortVector(std::vector<int>& vec, int start, int end) {
     for (int i = 1; i < n; i++) {
         if (!inserted[i]) {
             int value = vec[start + i];
-            auto it = std::lower_bound(sorted.begin(), sorted.end(), value);
-            sorted.insert(it, value);
+
+            // Perform manual binary search to find the insertion position.
+            size_t insertPos = 0;
+            for (size_t j = 0; j < sorted.size(); j++) {
+                if (sorted[j] >= value) {
+                    insertPos = j;
+                    break;
+                }
+                insertPos = j + 1;
+            }
+
+            // Insert the value at the correct position.
+            sorted.insert(sorted.begin() + insertPos, value);
         }
     }
 
-    // Copy the sorted subarray back.
+    // Copy back the sorted values into the original vector.
     for (int i = 0; i < n; i++) {
         vec[start + i] = sorted[i];
     }
+
 }
-
-
-
 
 // Merge function for vector (missing function)
 void PmergeMe::mergeVector(std::vector<int>& vec, int start, int mid, int end) {
@@ -174,41 +193,65 @@ void PmergeMe::insertSortDeque(std::deque<int>& deq, int start, int end) {
     if (n < 2)
         return;
 
+    // Temporary deque to hold the sorted elements.
     std::deque<int> sorted;
-    sorted.push_back(deq[start]);
+    sorted.push_back(deq[start]); // Start with the first element.
 
+    // Keep track of inserted elements
     std::vector<bool> inserted(n, false);
     inserted[0] = true;
 
+    // Generate Jacobsthal sequence for insertion order
     std::vector<int> jacobIndices = generateJacobsthalSequence(n);
 
+    // Insert elements following Jacobsthal order
     for (size_t idx = 0; idx < jacobIndices.size(); idx++) {
         int pos = jacobIndices[idx];
         if (pos >= n)
             break;
+
         int value = deq[start + pos];
-        // Use std::lower_bound on the deque (by copying iterators)
-        auto it = std::lower_bound(sorted.begin(), sorted.end(), value);
-        sorted.insert(it, value);
+
+        // Perform manual binary search to find insertion position
+        size_t insertPos = 0;
+        for (size_t j = 0; j < sorted.size(); j++) {
+            if (sorted[j] >= value) {
+                insertPos = j;
+                break;
+            }
+            insertPos = j + 1;
+        }
+
+        // Insert value at the correct position
+        sorted.insert(sorted.begin() + insertPos, value);
         inserted[pos] = true;
     }
 
+    // Insert remaining elements in natural order
     for (int i = 1; i < n; i++) {
         if (!inserted[i]) {
             int value = deq[start + i];
-            auto it = std::lower_bound(sorted.begin(), sorted.end(), value);
-            sorted.insert(it, value);
+
+            // Perform manual binary search to find insertion position
+            size_t insertPos = 0;
+            for (size_t j = 0; j < sorted.size(); j++) {
+                if (sorted[j] >= value) {
+                    insertPos = j;
+                    break;
+                }
+                insertPos = j + 1;
+            }
+
+            // Insert value at the correct position
+            sorted.insert(sorted.begin() + insertPos, value);
         }
     }
 
-    // Copy back the sorted elements.
+    // Copy sorted elements back to original deque
     for (int i = 0; i < n; i++) {
         deq[start + i] = sorted[i];
     }
 }
-
-
-
 
 // Merge function for deque 
 void PmergeMe::mergeDeque(std::deque<int>& deq, int start, int mid, int end) {
@@ -233,8 +276,6 @@ void PmergeMe::mergeDeque(std::deque<int>& deq, int start, int mid, int end) {
         deq[k++] = right[j++];
     }
 }
-
-
 
 // Print results and measure times
 void PmergeMe::printResults(std::vector<int>& vec, std::deque<int>& deq) {
