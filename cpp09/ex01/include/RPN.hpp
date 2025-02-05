@@ -17,7 +17,7 @@ class RPN
         ~RPN();
 
         bool isOperater(char check);
-        bool isNumber(char check);
+        bool isNumber(const std::string &token);
         int convertNum(char check);
         int calculation(int a, int b, char op);
 

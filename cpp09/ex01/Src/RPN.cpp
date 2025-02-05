@@ -20,13 +20,13 @@ bool RPN::isOperater(char check)
     return (false);
 }
 
-bool RPN::isNumber(char check)
-{
-    if (check >= '0' && check <= '9')
-        return (true);
-    return (false);
+bool RPN::isNumber(const std::string &token) {
+    for (size_t i = 0; i < token.size(); i++) {
+        if (!isdigit(token[i]))
+            return false;
+    }
+    return true;
 }
-
 int RPN::convertNum(char check)
 {
     int value;
@@ -39,13 +39,13 @@ int RPN::calculation(int a, int b, char op)
     if (op == '+')
         return b + a;
     else if (op == '-')
-        return b - a;
+        return a - b;
     else if (op == '*')
         return b * a;
     else
     {
-        if (a == 0 || b == 0)
+        if (a == 0)  
             return INT_MAX;
-        return b / a;
+        return a / b; 
     }
 }
